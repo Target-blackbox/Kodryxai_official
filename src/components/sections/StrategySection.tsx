@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import './StrategySection.css';
 import imgStrategy from '../../assets/ai_start.png';
 import imgGen from '../../assets/gen_ai.png';
@@ -33,9 +34,45 @@ const features = [
   },
 ];
 
+function ParallaxImage({ src, alt, speed = -0.12 }: { src: string; alt: string; speed?: number }) {
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const handleScroll = () => {
+      if (!imgRef.current) return;
+      const { top, height } = imgRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const elementCenter = top + height / 2;
+      const viewportCenter = windowHeight / 2;
+      const offset = elementCenter - viewportCenter;
+      
+      const translateY = offset * speed;
+
+      animationFrameId = requestAnimationFrame(() => {
+        if (imgRef.current) {
+          // Clamp the translation to prevent excessive clipping outside its container
+          const clampedY = Math.max(-60, Math.min(60, translateY));
+          imgRef.current.style.transform = `translateY(${clampedY}px)`;
+        }
+      });
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [speed]);
+
+  return <img ref={imgRef} src={src} alt={alt} style={{ willChange: 'transform' }} />;
+}
+
 export default function StrategySection() {
   return (
-    <section className="strategy" id="features">
+    <section className="strategy" id="services">
 
       <div className="strategy__header" data-aos="fade-up">
         <h2>Our Core Capabilities</h2>
@@ -72,7 +109,7 @@ export default function StrategySection() {
                 data-aos-duration="700"
                 data-aos-delay={String(i * 60)}
               >
-                <img src={f.img} alt={f.title} />
+                <ParallaxImage src={f.img} alt={f.title} speed={isLeft ? -0.1 : -0.15} />
               </div>
             </div>
           );
