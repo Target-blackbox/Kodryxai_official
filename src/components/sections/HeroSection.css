@@ -28,21 +28,20 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 80px 48px;
+  padding: 40px 48px;
 }
 
 /* ── Left ── */
 .hero__left {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   gap: 24px;
+  padding-right: 40px;
+  max-width: 640px;
 }
 
 .hero__heading {
@@ -57,8 +56,7 @@
   font-size: 1rem;
   line-height: 1.65;
   color: var(--text-dark);
-  max-width: 560px;
-  text-align: center;
+  max-width: 520px;
 }
 
 /* ── CTA moved up ── */
@@ -84,9 +82,7 @@
 .hero__testimonials {
   display: flex;
   gap: 16px;
-  width: 100%;
-  max-width: 700px;
-  justify-content: center;
+  max-width: 650px;
 }
 
 .hero__card {
