@@ -1,0 +1,173 @@
+/* ══ Strategy / Features Section ══ */
+.strategy {
+  padding: 100px 20px;
+  background: #f9faff;
+}
+
+/* ── Section header centred ── */
+.strategy__header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.strategy__header h2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.strategy__header p {
+  font-size: 1rem;
+  color: var(--text-body);
+}
+
+/* ══ Timeline wrapper ══ */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/*
+  Vertical centre line via ::before.
+  Sits exactly at left: 50%, width: 2px.
+*/
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(61, 82, 213, 0.5) 5%,
+    rgba(61, 82, 213, 0.5) 95%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+
+/* ══ Each feature row ══ */
+.timeline__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 220px;
+  margin-bottom: 80px;
+  z-index: 1;
+}
+
+.timeline__item:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Checkpoint dot: lives inside the row, centred on line ── */
+.timeline__dot {
+  position: absolute;
+  left: calc(50% - 9px);   /* 9 = half of 18px width */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--primary);
+  box-shadow: 0 0 0 5px rgba(61, 82, 213, 0.12);
+  z-index: 4;
+}
+
+/* ── Content and Image blocks: 45% each, leaving 10% for the centre ── */
+.timeline__content,
+.timeline__image {
+  width: 45%;
+  box-sizing: border-box;
+}
+
+/* ── LEFT item (even): text left, image right ── */
+.timeline__item--left .timeline__content {
+  order: 1;
+  text-align: right;
+  padding-right: 52px;
+}
+
+.timeline__item--left .timeline__image {
+  order: 2;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 52px;
+}
+
+/* ── RIGHT item (odd): image left, text right ── */
+.timeline__item--right .timeline__image {
+  order: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 52px;
+}
+
+.timeline__item--right .timeline__content {
+  order: 2;
+  text-align: left;
+  padding-left: 52px;
+}
+
+/* ── Images fill their column ── */
+.timeline__image img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+}
+
+/* ── Text styles ── */
+.timeline__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.timeline__desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* ── Mobile ── */
+@media (max-width: 700px) {
+  .timeline::before {
+    left: 18px;
+    transform: none;
+  }
+
+  .timeline__dot {
+    left: 9px;
+    top: 20px;
+    transform: none;
+  }
+
+  .timeline__item {
+    flex-direction: column;
+    padding-left: 46px;
+    align-items: flex-start;
+    min-height: unset;
+    margin-bottom: 60px;
+  }
+
+  .timeline__item--left .timeline__content,
+  .timeline__item--right .timeline__content,
+  .timeline__item--left .timeline__image,
+  .timeline__item--right .timeline__image {
+    width: 100%;
+    order: unset !important;
+    text-align: left !important;
+    padding: 0 !important;
+    margin-bottom: 14px;
+  }
+}

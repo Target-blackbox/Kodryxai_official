@@ -1,0 +1,84 @@
+import './StrategySection.css';
+import imgStrategy from '../../assets/ai_start.png';
+import imgGen from '../../assets/gen_ai.png';
+import imgAgentic from '../../assets/agentic_ai.png';
+import imgTradi from '../../assets/tradi_ai.png';
+import imgLite from '../../assets/ai_lite.png';
+
+const features = [
+  {
+    title: 'AI Strategy & Consulting',
+    desc: 'Actionable AI roadmaps — from discovery to deployment and governance.',
+    img: imgStrategy,
+  },
+  {
+    title: 'Generative AI Engineering',
+    desc: 'LLMs, RAG, and AI copilots tailored for enterprise productivity.',
+    img: imgGen,
+  },
+  {
+    title: 'Agentic AI & Autonomous Systems',
+    desc: 'Autonomous agents. Voice-ready. AgentOps-enabled.',
+    img: imgAgentic,
+  },
+  {
+    title: 'Traditional AI & ML Solutioning',
+    desc: 'Forecasting, prediction, and classification engines powered by ML/DL at scale.',
+    img: imgTradi,
+  },
+  {
+    title: 'AI Literacy',
+    desc: 'Upskill your teams and build in-house AI expertise. Build a competitive advantage in the AI era.',
+    img: imgLite,
+  },
+];
+
+export default function StrategySection() {
+  return (
+    <section className="strategy" id="features">
+
+      <div className="strategy__header" data-aos="fade-up">
+        <h2>Our Core Capabilities</h2>
+        <p>Comprehensive AI solutions tailored for enterprise growth.</p>
+      </div>
+
+      <div className="timeline">
+        {features.map((f, i) => {
+          const isLeft = i % 2 === 0; // even → text left, image right
+
+          return (
+            <div
+              key={i}
+              className={`timeline__item ${isLeft ? 'timeline__item--left' : 'timeline__item--right'}`}
+            >
+              {/* Checkpoint dot — centred on the vertical line via CSS */}
+              <div className="timeline__dot" />
+
+              {/* Text */}
+              <div
+                className="timeline__content"
+                data-aos={isLeft ? 'fade-right' : 'fade-left'}
+                data-aos-duration="700"
+                data-aos-delay={String(i * 60)}
+              >
+                <h3 className="timeline__title">{f.title}</h3>
+                <p className="timeline__desc">{f.desc}</p>
+              </div>
+
+              {/* Illustration */}
+              <div
+                className="timeline__image"
+                data-aos={isLeft ? 'fade-left' : 'fade-right'}
+                data-aos-duration="700"
+                data-aos-delay={String(i * 60)}
+              >
+                <img src={f.img} alt={f.title} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+    </section>
+  );
+}
