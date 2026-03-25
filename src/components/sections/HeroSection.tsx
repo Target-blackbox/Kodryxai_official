@@ -1,28 +1,36 @@
-
 import './HeroSection.css';
 
 const testimonials = [
   {
     id: 1,
-    quote:
-      'AI solutions that actually work in production. Scalable AI systems delivered faster than expected.',
+    quote: 'AI solutions that actually work in production. Scalable AI systems delivered faster than expected.',
     name: 'Amit Verma',
-    role: 'CTO',
+    role: 'CTO, TechCorp',
   },
   {
     id: 2,
-    quote:
-      'Transformed our workflows with reliable AI automation. Production ready AI built for real business impact.',
+    quote: 'Transformed our workflows with reliable AI automation. Production ready AI built for real business impact.',
     name: 'Akhildev',
     role: 'UI/UX Lead',
   },
   {
     id: 3,
-    quote:
-      'AI infrastructure that scales with our growth. From concept to production, flawlessly executed.',
+    quote: 'AI infrastructure that scales with our growth. From concept to production, flawlessly executed.',
     name: 'Raghu',
-    role: 'Manager',
+    role: 'Engineering Director',
   },
+  {
+    id: 4,
+    quote: 'Kodryx provided exactly the enterprise-grade AI integration we needed to automate our most complex legacy pipelines.',
+    name: 'Sarah Chen',
+    role: 'Head of Innovation',
+  },
+  {
+    id: 5,
+    quote: 'Their custom AI agents handled 10,000 concurrent customer support sessions on day one without breaking a sweat.',
+    name: 'James Harrison',
+    role: 'Director of Operations',
+  }
 ];
 
 const QuoteIcon = ({ flip = false }: { flip?: boolean }) => (
@@ -79,22 +87,27 @@ export default function HeroSection() {
 
           <button className="hero__cta">Get Started</button>
 
-          {/* Testimonial Cards */}
-          <div className="hero__testimonials">
-            {testimonials.map((t) => (
-              <div key={t.id} className="hero__card">
-                <QuoteIcon />
-                <p className="hero__card-text">{t.quote}</p>
-                <div className="hero__card-author">
-                  <AvatarIcon />
-                  <div>
-                    <p className="hero__card-name">{t.name}</p>
-                    <p className="hero__card-role">{t.role}</p>
+          {/* Infinite Marquee Testimonial Cards */}
+          <div className="hero__testimonials-container">
+            <div className="hero__testimonials-track">
+              {[...testimonials, ...testimonials].map((t, index) => (
+                <div 
+                  key={`${t.id}-${index}`} 
+                  className="hero__card"
+                >
+                  <QuoteIcon />
+                  <p className="hero__card-text">"{t.quote}"</p>
+                  <div className="hero__card-author">
+                    <AvatarIcon />
+                    <div>
+                      <p className="hero__card-name">{t.name}</p>
+                      <p className="hero__card-role">{t.role}</p>
+                    </div>
                   </div>
+                  <QuoteIcon flip />
                 </div>
-                <QuoteIcon flip />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 

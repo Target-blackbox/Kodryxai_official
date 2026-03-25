@@ -1,25 +1,37 @@
 .clients {
-  padding: 60px 20px;
-  background: var(--white);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 60px 0;
+  background: #f9faff;
+  overflow: hidden;
 }
 
-.clients__container {
-  max-width: 1000px;
-  margin: 0 auto;
+.clients__scroll-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.clients__track {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: calc(250px * 10); /* 5 clients * 2 = 10 items. Assume 250px each including gap */
+  animation: scrollClients 30s linear infinite;
   align-items: center;
-  gap: 40px;
+}
+
+.clients__track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollClients {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 5)); } /* Shift exactly 5 items to loop perfectly */
 }
 
 .clients__item {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1 1 150px;
-  max-width: 200px;
+  width: 250px;
+  padding: 0 40px;
 }
 
 .clients__item-img {
@@ -28,6 +40,7 @@
   height: auto;
   max-height: 80px;
   object-fit: contain;
+  mix-blend-mode: multiply; /* Removes baked-in white backgrounds when over light backgrounds! */
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }

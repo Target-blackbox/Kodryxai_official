@@ -14,14 +14,19 @@ const clients = [
 ];
 
 export default function ClientsSection() {
+  // Duplicate for seamless infinite scroll
+  const allClients = [...clients, ...clients];
+
   return (
     <section className="clients">
-      <div className="clients__container">
-        {clients.map((client, index) => (
-          <div key={index} className="clients__item">
-            <img src={client.logo} alt={client.name} className="clients__item-img" />
-          </div>
-        ))}
+      <div className="clients__scroll-container">
+        <div className="clients__track">
+          {allClients.map((client, index) => (
+            <div key={index} className="clients__item">
+              <img src={client.logo} alt={client.name} className="clients__item-img" />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
