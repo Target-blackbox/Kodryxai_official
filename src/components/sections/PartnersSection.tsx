@@ -15,7 +15,25 @@ const partners = [
   { name: 'Partner 6', logo: partner6 },
 ];
 
-export default function PartnersSection() {
+import { Skeleton } from '../ui/skeleton';
+
+export default function PartnersSection({ isLoading }: { isLoading?: boolean }) {
+  if (isLoading) {
+    return (
+      <section className="partners">
+        <div className="partners__scroll-container">
+          <div className="partners__track">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="partners__item">
+                <Skeleton className="h-8 w-24" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   // Duplicate partners for seamless scroll
   const allPartners = [...partners, ...partners];
 

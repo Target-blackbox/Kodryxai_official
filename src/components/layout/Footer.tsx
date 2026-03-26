@@ -3,6 +3,7 @@ import './Footer.css';
 import logo from '../../assets/kodryx_logo_transparent_1.png';
 
 export default function Footer() {
+
   const footerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -21,6 +22,7 @@ export default function Footer() {
 
   return (
     <footer className="footer" ref={footerRef}>
+
 
       {/* ── Layer 0: Background Sky & Translucent Waves ── */}
       <div className="footer__back-wave" aria-hidden="true">

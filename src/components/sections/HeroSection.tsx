@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import './HeroSection.css';
 
 const HeroGlassBackground = () => {
@@ -6,7 +7,7 @@ const HeroGlassBackground = () => {
     const handleMouseMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth) - 0.5;
       const y = (e.clientY / window.innerHeight) - 0.5;
-      
+
       const root = document.documentElement;
       root.style.setProperty('--mouse-x', x.toString());
       root.style.setProperty('--mouse-y', y.toString());
@@ -27,65 +28,100 @@ const HeroGlassBackground = () => {
 };
 
 const testimonials = [
-  {
-    id: 1,
-    quote: 'AI solutions that actually work in production. Scalable AI systems delivered faster than expected.',
-    name: 'Amit Verma',
-    role: 'CTO, TechCorp',
-  },
-  {
-    id: 2,
-    quote: 'Transformed our workflows with reliable AI automation. Production ready AI built for real business impact.',
-    name: 'Akhildev',
-    role: 'UI/UX Lead',
-  },
-  {
-    id: 3,
-    quote: 'AI infrastructure that scales with our growth. From concept to production, flawlessly executed.',
-    name: 'Raghu',
-    role: 'Engineering Director',
-  },
-  {
-    id: 4,
-    quote: 'Kodryx provided exactly the enterprise-grade AI integration we needed to automate our most complex legacy pipelines.',
-    name: 'Sarah Chen',
-    role: 'Head of Innovation',
-  },
-  {
-    id: 5,
-    quote: 'Their custom AI agents handled 10,000 concurrent customer support sessions on day one without breaking a sweat.',
-    name: 'James Harrison',
-    role: 'Director of Operations',
-  }
+  { id: 1, quote: "Kodryx AI's predictive models revolutionized our supply chain efficiency.", name: "Sarah Jenkins", role: "Logistics Director" },
+  { id: 2, quote: "The agentic AI implementation was seamless and human-like.", name: "David Chen", role: "CTO, Fintech" },
+  { id: 3, quote: "Finally, a production-ready RAG system that actually works at scale.", name: "Marcus Thorne", role: "Head of Data Science" },
+  { id: 4, quote: "Their strategy roadmap gave us a clear competitive advantage.", name: "Elena Rossi", role: "CEO, Retail Group" },
+  { id: 5, quote: "Enterprise grade AI with a startup's speed of execution.", name: "James Wilson", role: "VP Engineering" },
 ];
 
 const QuoteIcon = ({ flip = false }: { flip?: boolean }) => (
-  <svg
-    width="28"
-    height="22"
-    viewBox="0 0 28 22"
-    fill="none"
-    className={`quote-icon${flip ? ' quote-icon--flip' : ''}`}
-    xmlns="http://www.w3.org/2000/svg"
-    style={flip ? { transform: 'rotate(180deg)' } : {}}
-  >
-    <path
-      d="M0 22V13.4C0 9.86667 0.8 6.93333 2.4 4.6C4.05333 2.26667 6.45333 0.666667 9.6 0L11.2 2.8C9.06667 3.33333 7.46667 4.33333 6.4 5.8C5.38667 7.26667 4.88 9 4.88 11H9.6V22H0ZM16.4 22V13.4C16.4 9.86667 17.2 6.93333 18.8 4.6C20.4533 2.26667 22.8533 0.666667 26 0L27.6 2.8C25.4667 3.33333 23.8667 4.33333 22.8 5.8C21.7867 7.26667 21.28 9 21.28 11H26V22H16.4Z"
-      fill="#3d52d5"
-      fillOpacity="0.35"
-    />
+  <svg className={`quote-icon ${flip ? 'quote-icon--flip' : ''}`} viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 11V6.264C0 4.2 0.352 2.684 1.056 1.716C1.76 0.748 3.124 0.176 5.148 0L5.364 1.548C4.14 1.636 3.326 1.954 2.922 2.502C2.518 3.05 2.316 3.886 2.316 5.01V5.796H5.256V11H0ZM8.448 11V6.264C8.448 4.2 8.8 2.684 9.504 1.716C10.208 0.748 11.572 0.176 13.596 0L13.812 1.548C12.588 1.636 11.774 1.954 11.37 2.502C10.966 3.05 10.764 3.886 10.764 5.01V5.796H13.704V11H8.448Z" fill="#3D52D5" />
   </svg>
 );
 
 const AvatarIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="18" cy="18" r="18" fill="#dce3f8" />
-    <circle cx="18" cy="15" r="6" fill="#3d52d5" fillOpacity="0.5" />
-    <ellipse cx="18" cy="28" rx="10" ry="6" fill="#3d52d5" fillOpacity="0.3" />
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="20" fill="#E9EEFE" />
+    <circle cx="20" cy="16" r="6" stroke="#3D52D5" strokeWidth="2" />
+    <path d="M30 31C30 26.5817 25.5228 23 20 23C14.4772 23 10 26.5817 10 31" stroke="#3D52D5" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
-export default function HeroSection() {
+import { Skeleton } from '../ui/skeleton';
+import heroIllustration from '../../assets/hero_illustration_2.png';
+
+export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
+  // Initialize state synchronously to avoid render flash on first visit
+  const [shouldAnimate] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const hasVisited = localStorage.getItem('hasVisitedKodryx');
+    if (!hasVisited) {
+      localStorage.setItem('hasVisitedKodryx', 'true');
+      return true;
+    }
+    return false;
+  });
+
+  if (isLoading) {
+    return (
+      <section className="hero">
+        <HeroGlassBackground />
+        <div className="hero__content">
+          <div className="hero__left">
+            <Skeleton className="h-16 w-[80%] mb-4" />
+            <Skeleton className="h-16 w-[60%] mb-8" />
+            <Skeleton className="h-6 w-[90%] mb-2" />
+            <Skeleton className="h-6 w-[85%] mb-8" />
+            <Skeleton className="h-12 w-40 rounded-full" />
+          </div>
+          <div className="hero__right">
+            <Skeleton className="w-full aspect-square rounded-2xl" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring" as const,
+        damping: 25,
+        stiffness: 100,
+      },
+    },
+  };
+
+  const illustrationVariants = {
+    hidden: { opacity: 0, x: 50, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut" as const,
+        delay: 0.5,
+      },
+    },
+  };
+
   return (
     <section className="hero">
       <HeroGlassBackground />
@@ -100,26 +136,33 @@ export default function HeroSection() {
 
       <div className="hero__content">
         {/* ── Left content ── */}
-        <div className="hero__left">
-          <h1 className="hero__heading">
+        <motion.div 
+          className="hero__left"
+          variants={containerVariants}
+          initial={shouldAnimate ? "hidden" : "visible"}
+          animate="visible"
+        >
+          <motion.h1 className="hero__heading" variants={itemVariants}>
             AI That Builds<br />
             Competitive Advantage
-          </h1>
+          </motion.h1>
 
-          <p className="hero__sub">
+          <motion.p className="hero__sub" variants={itemVariants}>
             Beyond the AI hype: building, scaling, and operating real-world AI for businesses.
             We design production-ready systems that integrate seamlessly with your data,
             infrastructure, and workflows.
-          </p>
+          </motion.p>
 
-          <button className="hero__cta">Get Started</button>
+          <motion.button className="hero__cta" variants={itemVariants}>
+            Get Started
+          </motion.button>
 
           {/* Infinite Marquee Testimonial Cards */}
           <div className="hero__testimonials-container">
             <div className="hero__testimonials-track">
               {[...testimonials, ...testimonials].map((t, index) => (
-                <div 
-                  key={`${t.id}-${index}`} 
+                <div
+                  key={`${t.id}-${index}`}
                   className="hero__card"
                 >
                   <QuoteIcon />
@@ -136,7 +179,23 @@ export default function HeroSection() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* ── Right content ── */}
+        <motion.div 
+          className="hero__right"
+          variants={illustrationVariants}
+          initial={shouldAnimate ? "hidden" : "visible"}
+          animate="visible"
+        >
+          <div className="hero__illustration-wrapper">
+            <img
+              src={heroIllustration}
+              alt="AI Robot Illustration"
+              className="hero__img"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -13,7 +13,25 @@ const clients = [
   { name: 'Partner 5', logo: partner5 },
 ];
 
-export default function ClientsSection() {
+import { Skeleton } from '../ui/skeleton';
+
+export default function ClientsSection({ isLoading }: { isLoading?: boolean }) {
+  if (isLoading) {
+    return (
+      <section className="clients">
+        <div className="clients__scroll-container">
+          <div className="clients__track">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="clients__item">
+                <Skeleton className="h-8 w-24" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   // Duplicate for seamless infinite scroll
   const allClients = [...clients, ...clients];
 
