@@ -39,6 +39,9 @@ export default function PartnersSection({ isLoading }: { isLoading?: boolean }) 
 
   return (
     <section className="partners">
+      <div className="partners__header">
+        <h2 className="partners__title">Tech Stack We Use</h2>
+      </div>
       <div className="partners__scroll-container">
         <div className="partners__track">
           {allPartners.map((p, index) => (

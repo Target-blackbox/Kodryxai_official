@@ -49,7 +49,7 @@ function ParallaxImage({ src, alt, speed = -0.12 }: { src: string; alt: string; 
       const elementCenter = top + height / 2;
       const viewportCenter = windowHeight / 2;
       const offset = elementCenter - viewportCenter;
-      
+
       const translateY = offset * speed;
 
       animationFrameId = requestAnimationFrame(() => {
@@ -76,7 +76,7 @@ import { Skeleton } from '../ui/skeleton';
 export default function StrategySection({ isLoading }: { isLoading?: boolean }) {
   if (isLoading) {
     return (
-      <section className="strategy" id="services">
+      <section className="strategy" id="solutions">
         <div className="strategy__header">
           <Skeleton className="h-10 w-64 mx-auto mb-4" />
           <Skeleton className="h-5 w-96 mx-auto" />
@@ -101,16 +101,16 @@ export default function StrategySection({ isLoading }: { isLoading?: boolean }) 
   }
 
   return (
-    <section className="strategy" id="services">
+    <section className="strategy" id="solutions">
 
-      <motion.div 
+      <motion.div
         className="strategy__header"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
         transition={{ duration: 0.6 }}
       >
-        <h2>Our Core Capabilities</h2>
+        <h2>Our Core Solutions</h2>
         <p>Comprehensive AI solutions tailored for enterprise growth.</p>
       </motion.div>
 

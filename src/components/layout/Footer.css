@@ -1,211 +1,254 @@
-/* ══ Footer ══ */
+/* ── FOOTER DESIGN TOKENS ── */
+:root {
+  --footer-primary-blue: #1e3a8a;
+  --footer-gradient-1: #3b5bdb;
+  --footer-gradient-2: #4c6ef5;
+  --footer-accent-blue: #748ffc;
+  --footer-light-text: #e7ecff;
+  --footer-muted-text: #c7d2fe;
+  --footer-border: rgba(255, 255, 255, 0.15);
+  --footer-glass: rgba(255, 255, 255, 0.08);
+  --footer-glass-hover: rgba(255, 255, 255, 0.15);
+}
+
 .footer {
+  width: 100%;
   position: relative;
-  background: #f9faff;
-  /* seamless sky background matching Products section */
+  /* Updated to White-to-Blue Gradient */
+  background: linear-gradient(to bottom, 
+    #ffffff 0%, 
+    #f8faff 15%, 
+    #e8edff 30%, 
+    #3d52d5 70%, 
+    #1e3a8a 100%
+  );
+  color: var(--text-dark);
   overflow: hidden;
-  z-index: 1;
-  /* Establish stacking context */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: 60px 0 40px;
 }
 
-/* Base style for the 2 split SVGs */
-.footer__back-wave,
-.footer__front-wave {
-  position: absolute;
-  top: 25px;
-  left: 0;
-  width: 100%;
-  height: 140px;
-  line-height: 0;
-  pointer-events: none;
-  /* Let clicks pass to grid if needed */
-}
-
-.footer__back-wave svg,
-.footer__front-wave svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.footer__back-wave {
-  z-index: 0;
-  /* Base sky/waves layer */
-}
-
-.footer__front-wave {
-  z-index: 2;
-  /* In front of watermark, solid blue curve */
-}
-
-/* ── Giant watermark text ── */
-.footer__watermark {
-  position: absolute;
-  top: -50px;
-  /* Rests perfectly so top shows against sky, bottom is completely sliced off by the front wave */
-  left: 50%;
-  transform: translateX(-50%) translateY(300px);
-  /* Starts deep in the solid blue footer */
-  white-space: nowrap;
-  font-size: clamp(4rem, 10vw, 11rem);
-  font-weight: 900;
-  font-family: 'Hind Jalandhar', sans-serif;
-  letter-spacing: -0.02em;
-  color: #0c3490;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-  /* Sandwiched perfectly: In front of back-wave, behind front-wave */
-  opacity: 0;
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
-    opacity 1s ease 0.1s;
-}
-
-.footer__watermark--visible {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
-
-/* ── Footer main content ── */
-.footer__content {
-  position: relative;
-  z-index: 3;
-  /* Always in front so links are clickable */
-  width: 100%;
-  background: #3d52d5;
-  /* Solid blue base matching the front wave */
-  margin-top: 139px;
-  /* Starts just 1px above SVG bottom to seal any gaps, SVGs are 140px tall */
-  padding: 0 40px 24px;
-}
-
-/* ── 4-column grid ── */
-.footer__grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
-  max-width: 1200px;
+.footer__container {
+  max-width: 1400px;
   margin: 0 auto;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
-/* ── Brand column ── */
-.footer__logo {
+/* ── SECTION 1: Top (Logo & Nav) ── */
+.footer__section--top {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer__brand-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Updated logo/icon logic to match Navbar */
+.footer__logo-anchor {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-bottom: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.footer__logo-img {
-  width: 150px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.footer__logo-text {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-}
-
-.footer__desc {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 20px;
-}
-
-/* ── Social icons ── */
-.footer__socials {
-  display: flex;
-  gap: 10px;
-}
-
-.footer__social {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.footer__social:hover {
-  background: rgba(255, 255, 255, 0.3);
+.footer__logo-anchor:hover {
   transform: translateY(-2px);
 }
 
-/* ── Link columns ── */
-.footer__col-title {
-  font-size: 0.9rem;
-  font-weight: 700;
+.footer__logo-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.footer__brand-text {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+
+.footer__subtitle {
+  font-size: 1rem;
+  color: #1e3a8a;
+  opacity: 0.9;
+  max-width: 320px;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.footer__social-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.footer__social {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(30, 58, 138, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e3a8a;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(30, 58, 138, 0.15);
+}
+
+.footer__social:hover {
+  transform: scale(1.05);
+  background: #1e3a8a;
   color: #fff;
-  margin-bottom: 16px;
-  letter-spacing: 0.03em;
+  border-color: #1e3a8a;
+}
+
+.footer__nav-columns {
+  display: flex;
+  gap: 80px;
+  flex: 2;
+  justify-content: flex-end;
+}
+
+.footer__nav-col {
+  min-width: 140px;
+}
+
+.footer__col-title {
+  color: #1e3a8a;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .footer__links {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+}
+
+.footer__links li {
+  margin-bottom: 12px;
 }
 
 .footer__links a {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: #1e3a8a;
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  opacity: 0.8;
 }
 
 .footer__links a:hover {
-  color: #fff;
+  color: #3d52d5;
+  opacity: 1;
+  padding-left: 4px;
 }
 
-/* ── Copyright ── */
-.footer__bottom {
-  text-align: left;
-  max-width: 1200px;
+/* ── SECTION 2: Center (Map) ── */
+.footer__section--center {
+  width: 100%;
+  text-align: center;
+}
+
+.footer__map-title {
+  color: #1e3a8a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer__map-container {
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding-top: 20px;
 }
 
-.footer__bottom p {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.55);
+/* ── SECTION 3: Bottom (Watermark) ── */
+.footer__section--bottom {
+  text-align: center;
+  padding-bottom: 40px;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .footer__grid {
-    grid-template-columns: 1fr 1fr;
+.footer__brand-watermark {
+  font-size: 160px;
+  font-weight: 900;
+  color: #96aff2;
+  opacity: 0.30;
+  letter-spacing: 0.1em;
+  margin-bottom: -20px;
+  user-select: none;
+}
+
+.footer__legal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 32px;
+  color: white; /* Bottom of footer is blue, so white text */
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .footer__section--top {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__brand-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__nav-columns {
+    gap: 40px;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 80px 0 40px;
+  }
+
+  .footer__container {
+    gap: 60px;
+    padding: 0 24px;
+  }
+
+  .footer__nav-columns {
+    flex-direction: column;
     gap: 32px;
+    align-items: center;
   }
 
-  .footer__col--brand {
-    grid-column: span 2;
-  }
-
-  .footer__watermark {
-    font-size: 5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer__col--brand {
-    grid-column: span 1;
+  .footer__legal {
+    flex-direction: column;
+    gap: 16px;
   }
 }

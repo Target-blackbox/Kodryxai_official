@@ -1,0 +1,145 @@
+.contact-banner {
+  padding: 60px 0;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-banner__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.contact-banner__content {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 20px;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(61, 82, 213, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background accent in the banner */
+.contact-banner__content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.contact-banner__title {
+  color: var(--white);
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.contact-banner__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-banner__label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  margin-left: 4px;
+}
+
+.contact-banner__cta {
+  background: var(--white);
+  border: none;
+  border-radius: 60px;
+  padding: 10px 32px 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-banner__cta:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.cta-circle {
+  background: var(--primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  transition: transform 0.4s ease;
+}
+
+.contact-banner__cta:hover .cta-circle {
+  transform: translateX(4px);
+}
+
+.cta-circle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cta-text {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* Responsiveness */
+@media (max-width: 1100px) {
+  .contact-banner__content {
+    padding: 60px 60px;
+  }
+  .contact-banner__title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .contact-banner__content {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+  
+  .contact-banner__right {
+    align-items: center;
+  }
+  
+  .contact-banner__label {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-banner__title {
+    font-size: 2.2rem;
+  }
+  .cta-text {
+    font-size: 0.9rem;
+  }
+  .contact-banner__cta {
+    padding: 10px 24px 10px 10px;
+  }
+}
