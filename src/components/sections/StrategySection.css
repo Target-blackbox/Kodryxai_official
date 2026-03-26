@@ -41,13 +41,11 @@
   left: 50%;
   width: 2px;
   transform: translateX(-50%);
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(61, 82, 213, 0.5) 5%,
-    rgba(61, 82, 213, 0.5) 95%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(61, 82, 213, 0.5) 5%,
+      rgba(61, 82, 213, 0.5) 95%,
+      transparent 100%);
   z-index: 0;
 }
 
@@ -69,7 +67,8 @@
 /* ── Checkpoint dot: lives inside the row, centred on line ── */
 .timeline__dot {
   position: absolute;
-  left: calc(50% - 9px);   /* 9 = half of 18px width */
+  left: calc(50% - 9px);
+  /* 9 = half of 18px width */
   top: 50%;
   transform: translateY(-50%);
   width: 18px;

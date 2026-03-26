@@ -1,4 +1,30 @@
+import { useEffect } from 'react';
 import './HeroSection.css';
+
+const HeroGlassBackground = () => {
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+      
+      const root = document.documentElement;
+      root.style.setProperty('--mouse-x', x.toString());
+      root.style.setProperty('--mouse-y', y.toString());
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <div className="hero__glass-bg">
+      <div className="hero__glass-panel hero__glass-panel--1"></div>
+      <div className="hero__glass-panel hero__glass-panel--2"></div>
+      <div className="hero__glass-panel hero__glass-panel--3"></div>
+      <div className="hero__glass-panel hero__glass-panel--4"></div>
+      <div className="hero__glass-panel hero__glass-panel--5"></div>
+    </div>
+  );
+};
 
 const testimonials = [
   {
@@ -62,11 +88,12 @@ const AvatarIcon = () => (
 export default function HeroSection() {
   return (
     <section className="hero">
+      <HeroGlassBackground />
       {/* ── Background Split (Curved SVG) ── */}
       <div className="hero__bg" aria-hidden="true">
         <svg viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
           {/* White left side with the specific curve */}
-          <path d="M0 0H800C800 0 850 150 820 400C790 650 850 900 850 900H0V0Z" fill="#ffffff" />
+          <path d="M0 0H800C800 0 850 150 820 400C790 650 850 900 850 900H0V0Z" fill="rgba(255, 255, 255, 0.4)" />
           {/* Light blue right side fills the rest (handled via CSS background on parent) */}
         </svg>
       </div>
@@ -110,10 +137,7 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
   );
 }
-
