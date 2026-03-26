@@ -114,16 +114,16 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
         <div className="hero__mesh-blob hero__mesh-blob--2"></div>
         <div className="hero__mesh-blob hero__mesh-blob--3"></div>
         <div className="hero__mesh-blob hero__mesh-blob--4"></div>
-        
+
         {/* AI Bar Graph Wave Background at Bottom */}
         <div className="hero__waves-container hero__bar-spectrogram">
           {[...Array(100)].map((_, i) => (
-            <div 
-              key={i} 
-              className="hero__bar" 
-              style={{ 
+            <div
+              key={i}
+              className="hero__bar"
+              style={{
                 height: `${15 + Math.random() * 70}%`,
-                animationDelay: `${i * 0.05}s` 
+                animationDelay: `${i * 0.05}s`
               }}
             />
           ))}
