@@ -1,9 +1,32 @@
 .partners {
-  padding: 48px 0;
+  padding: 80px 0;
   border-top: 1px solid #eef0f8;
   background: var(--white);
   overflow: hidden;
 }
+
+.partners__header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.partners__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.partners__title::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #3d52d5;
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
 
 .partners__scroll-container {
   overflow: hidden;
@@ -25,8 +48,15 @@
 }
 
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 40px)); } /* 50% because we duplicated the items */
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50% - 40px));
+  }
+
+  /* 50% because we duplicated the items */
 }
 
 .partners__item {

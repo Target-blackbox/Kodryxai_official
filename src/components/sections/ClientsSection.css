@@ -1,8 +1,31 @@
 .clients {
-  padding: 60px 0;
-  background: #f9faff;
+  padding: 80px 0;
+  background: #ffffff;
   overflow: hidden;
 }
+
+.clients__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.clients__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.clients__title::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #3d52d5;
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
 
 .clients__scroll-container {
   width: 100%;
@@ -12,7 +35,8 @@
 
 .clients__track {
   display: flex;
-  width: calc(250px * 10); /* 5 clients * 2 = 10 items. Assume 250px each including gap */
+  width: calc(250px * 10);
+  /* 5 clients * 2 = 10 items. Assume 250px each including gap */
   animation: scrollClients 30s linear infinite;
   align-items: center;
 }
@@ -22,8 +46,15 @@
 }
 
 @keyframes scrollClients {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-250px * 5)); } /* Shift exactly 5 items to loop perfectly */
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-250px * 5));
+  }
+
+  /* Shift exactly 5 items to loop perfectly */
 }
 
 .clients__item {
@@ -40,7 +71,8 @@
   height: auto;
   max-height: 80px;
   object-fit: contain;
-  mix-blend-mode: multiply; /* Removes baked-in white backgrounds when over light backgrounds! */
+  mix-blend-mode: multiply;
+  /* Removes baked-in white backgrounds when over light backgrounds! */
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }

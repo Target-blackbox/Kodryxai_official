@@ -7,6 +7,7 @@ import PartnersSection from './components/sections/PartnersSection';
 import StrategySection from './components/sections/StrategySection';
 import ClientsSection from './components/sections/ClientsSection';
 import ProductsSection from './components/sections/ProductsSection';
+import ContactSection from './components/sections/ContactSection';
 import Footer from './components/layout/Footer';
 
 function App() {
@@ -24,10 +25,11 @@ function App() {
       <Navbar />
       <main>
         <HeroSection isLoading={isLoading} />
-        <PartnersSection isLoading={isLoading} />
-        <StrategySection isLoading={isLoading} />
         <ClientsSection isLoading={isLoading} />
+        <StrategySection isLoading={isLoading} />
+        <PartnersSection isLoading={isLoading} />
         <ProductsSection isLoading={isLoading} />
+        <ContactSection />
       </main>
       <Footer />
 

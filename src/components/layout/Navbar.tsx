@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import './Navbar.css';
 
-import logo from '../../assets/kodryx_logo_transparent_1.png';
+import favcon from '../../assets/favcon.webp';
 
 const navLinks = [
   { name: 'Home', id: 'home' },
-  { name: 'Services', id: 'services' }, // Maps to features/capabilities
+  { name: 'Solutions', id: 'solutions' }, // Maps to features/capabilities
   { name: 'Products', id: 'products' },
   { name: 'Resources', id: 'resources' }
 ];
@@ -38,8 +38,9 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <div className="navbar__logo">
-        <img src={logo} alt="Kodryx AI" className="navbar__logo-img" />
+      <div className="navbar__logo" onClick={() => handleNavClick('Home', 'home')}>
+        <img src={favcon} alt="Kodryx AI" className="navbar__logo-img" />
+        <span className="navbar__brand-text">KODRYX AI</span>
       </div>
 
       <ul className="navbar__links">
@@ -55,7 +56,7 @@ export default function Navbar() {
         ))}
       </ul>
 
-      <button className="navbar__cta">Contact Us</button>
+      <button className="navbar__cta" onClick={() => handleNavClick('Contact', 'contact')}>Contact Us</button>
     </nav>
   );
 }

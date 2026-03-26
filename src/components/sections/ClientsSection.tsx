@@ -37,6 +37,9 @@ export default function ClientsSection({ isLoading }: { isLoading?: boolean }) {
 
   return (
     <section className="clients">
+      <div className="clients__header">
+        <h2 className="clients__title">Our Clients</h2>
+      </div>
       <div className="clients__scroll-container">
         <div className="clients__track">
           {allClients.map((client, index) => (
