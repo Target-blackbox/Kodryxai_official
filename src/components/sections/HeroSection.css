@@ -1,21 +1,20 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  padding-top: 80px; /* Accounts for the transparent fixed navbar */
-  background: #c3cded; /* Light blue base from Figma for the right side */
+  padding-top: 80px;
+  background-color: #f8faff;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
 
-/* ── Custom SVG Curve Background ── */
 .hero__bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 0;
 }
 
 .hero__bg svg {
@@ -27,7 +26,7 @@
 /* ── Content Grid ── */
 .hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -95,7 +94,8 @@
   gap: 16px;
   width: max-content;
   animation: scrollTestimonials 25s linear infinite;
-  padding: 10px 0; /* Add padding to prevent clipping of box shadows */
+  padding: 10px 0;
+  /* Add padding to prevent clipping of box shadows */
 }
 
 .hero__testimonials-track:hover {
@@ -103,8 +103,13 @@
 }
 
 @keyframes scrollTestimonials {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 8px)); } 
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50% - 8px));
+  }
 }
 
 .hero__card {
@@ -114,7 +119,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 280px; /* Fixed width to maintain card shape in tracks */
+  width: 280px;
+  /* Fixed width to maintain card shape in tracks */
   flex-shrink: 0;
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 12px rgba(61, 82, 213, 0.08);
@@ -184,7 +190,98 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
+/* ── HERO GLASS PANELS ── */
+.hero__glass-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero__glass-panel {
+  position: absolute;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  /* Mouse parallax + floating animation combined */
+  transition: transform 0.3s ease-out;
+  animation: heroBgFloat 35s ease-in-out infinite alternate;
+}
+
+.hero__glass-panel--1 {
+  width: 45%;
+  height: 140%;
+  top: -20%;
+  left: -5%;
+  background: linear-gradient(135deg, rgba(200, 225, 255, 0.25), rgba(255, 255, 255, 0));
+  transform: translate(calc(var(--mouse-x) * 40px), calc(var(--mouse-y) * 40px)) skewX(-18deg);
+}
+
+.hero__glass-panel--2 {
+  width: 35%;
+  height: 150%;
+  top: -25%;
+  left: 15%;
+  background: linear-gradient(135deg, rgba(180, 210, 255, 0.2), rgba(255, 255, 255, 0));
+  transform: translate(calc(var(--mouse-x) * -30px), calc(var(--mouse-y) * -30px)) skewX(-18deg);
+  animation-delay: -5s;
+}
+
+.hero__glass-panel--3 {
+  width: 42%;
+  height: 140%;
+  top: -20%;
+  left: 40%;
+  background: linear-gradient(135deg, rgba(210, 230, 255, 0.28), rgba(255, 255, 255, 0));
+  transform: translate(calc(var(--mouse-x) * 50px), calc(var(--mouse-y) * 20px)) skewX(-18deg);
+  animation-delay: -12s;
+}
+
+.hero__glass-panel--4 {
+  width: 30%;
+  height: 130%;
+  top: -15%;
+  left: 70%;
+  background: linear-gradient(135deg, rgba(190, 220, 255, 0.22), rgba(255, 255, 255, 0));
+  transform: translate(calc(var(--mouse-x) * -45px), calc(var(--mouse-y) * 50px)) skewX(-18deg);
+  animation-delay: -18s;
+}
+
+.hero__glass-panel--5 {
+  width: 25%;
+  height: 120%;
+  top: -10%;
+  left: 88%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(150, 190, 255, 0.15));
+  transform: translate(calc(var(--mouse-x) * 35px), calc(var(--mouse-y) * -55px)) skewX(-18deg);
+}
+
+@keyframes heroBgFloat {
+  0% { transform: translate(calc(var(--mouse-x) * 20px), calc(var(--mouse-y) * 20px)) skewX(-18deg); }
+  100% { transform: translate(calc(var(--mouse-x) * 20px + 40px), calc(var(--mouse-y) * 20px + 50px)) skewX(-18deg); }
+}
+
+@media (max-width: 1024px) {
+  .hero__glass-panel { opacity: 0.6; }
+}
+
+@media (max-width: 768px) {
+  .hero__glass-bg { display: none; }
+}
