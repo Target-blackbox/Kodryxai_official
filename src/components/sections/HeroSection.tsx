@@ -1,31 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
 import { motion } from 'framer-motion';
 import './HeroSection.css';
-
-const HeroGlassBackground = () => {
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) - 0.5;
-      const y = (e.clientY / window.innerHeight) - 0.5;
-
-      const root = document.documentElement;
-      root.style.setProperty('--mouse-x', x.toString());
-      root.style.setProperty('--mouse-y', y.toString());
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  return (
-    <div className="hero__glass-bg">
-      <div className="hero__glass-panel hero__glass-panel--1"></div>
-      <div className="hero__glass-panel hero__glass-panel--2"></div>
-      <div className="hero__glass-panel hero__glass-panel--3"></div>
-      <div className="hero__glass-panel hero__glass-panel--4"></div>
-      <div className="hero__glass-panel hero__glass-panel--5"></div>
-    </div>
-  );
-};
 
 const testimonials = [
   { id: 1, quote: "Kodryx AI's predictive models revolutionized our supply chain efficiency.", name: "Sarah Jenkins", role: "Logistics Director" },
@@ -34,6 +10,7 @@ const testimonials = [
   { id: 4, quote: "Their strategy roadmap gave us a clear competitive advantage.", name: "Elena Rossi", role: "CEO, Retail Group" },
   { id: 5, quote: "Enterprise grade AI with a startup's speed of execution.", name: "James Wilson", role: "VP Engineering" },
 ];
+
 
 const QuoteIcon = ({ flip = false }: { flip?: boolean }) => (
   <svg className={`quote-icon ${flip ? 'quote-icon--flip' : ''}`} viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +44,14 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
   if (isLoading) {
     return (
       <section className="hero">
-        <HeroGlassBackground />
+        <div className="hero__mesh-container">
+          <div className="hero__mesh-blob hero__mesh-blob--1"></div>
+          <div className="hero__mesh-blob hero__mesh-blob--2"></div>
+          <div className="hero__mesh-blob hero__mesh-blob--3"></div>
+          <div className="hero__mesh-blob hero__mesh-blob--4"></div>
+          <div className="hero__frosted-overlay"></div>
+        </div>
+
         <div className="hero__content">
           <div className="hero__left">
             <Skeleton className="h-16 w-[80%] mb-4" />
@@ -124,7 +108,36 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
 
   return (
     <section className="hero">
-      <HeroGlassBackground />
+      {/* ── Frosted Mesh Gradient Background ── */}
+      <div className="hero__mesh-container">
+        <div className="hero__mesh-blob hero__mesh-blob--1"></div>
+        <div className="hero__mesh-blob hero__mesh-blob--2"></div>
+        <div className="hero__mesh-blob hero__mesh-blob--3"></div>
+        <div className="hero__mesh-blob hero__mesh-blob--4"></div>
+        
+        {/* AI Bar Graph Wave Background at Bottom */}
+        <div className="hero__waves-container hero__bar-spectrogram">
+          {[...Array(100)].map((_, i) => (
+            <div 
+              key={i} 
+              className="hero__bar" 
+              style={{ 
+                height: `${15 + Math.random() * 70}%`,
+                animationDelay: `${i * 0.05}s` 
+              }}
+            />
+          ))}
+        </div>
+
+
+
+
+
+        <div className="hero__frosted-overlay"></div>
+      </div>
+
+
+
       {/* ── Background Split (Curved SVG) ── */}
       <div className="hero__bg" aria-hidden="true">
         <svg viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
