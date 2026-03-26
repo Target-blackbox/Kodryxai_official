@@ -146,8 +146,33 @@ const AbstractDecorations = () => (
   </div>
 );
 
-export default function ProductsSection() {
+import { Skeleton } from '../ui/skeleton';
+
+export default function ProductsSection({ isLoading }: { isLoading?: boolean }) {
   const [activeTab, setActiveTab] = useState('cybersaathi');
+
+  if (isLoading) {
+    return (
+      <section className="products" id="products">
+        <AbstractDecorations />
+        <div className="products__header">
+          <Skeleton className="h-10 w-64 mx-auto mb-4" />
+          <Skeleton className="h-5 w-96 mx-auto" />
+        </div>
+        <div className="products__perspective-grid">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="products__card products__card--center" style={{ opacity: 0.5 }}>
+              <Skeleton className="h-6 w-20 mb-4" />
+              <Skeleton className="h-32 w-full mb-4" />
+              <Skeleton className="h-6 w-full mb-2" />
+              <Skeleton className="h-4 w-2/3" />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   const activeProduct = products.find(p => p.id === activeTab) || products[2];
   const activeProductIndex = products.findIndex(p => p.id === activeTab);
 
@@ -155,7 +180,7 @@ export default function ProductsSection() {
     <section className="products" id="products">
       <AbstractDecorations />
 
-      <div className="products__header" data-aos="fade-up">
+      <div className="products__header">
         <h2>Our Products</h2>
         <p>Cutting-edge AI tools built to solve real-world complexities.</p>
       </div>

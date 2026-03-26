@@ -6,6 +6,8 @@ import imgAgentic from '../../assets/agentic_ai.png';
 import imgTradi from '../../assets/tradi_ai.png';
 import imgLite from '../../assets/ai_lite.png';
 
+import { motion } from 'framer-motion';
+
 const features = [
   {
     title: 'AI Strategy & Consulting',
@@ -52,7 +54,6 @@ function ParallaxImage({ src, alt, speed = -0.12 }: { src: string; alt: string; 
 
       animationFrameId = requestAnimationFrame(() => {
         if (imgRef.current) {
-          // Clamp the translation to prevent excessive clipping outside its container
           const clampedY = Math.max(-60, Math.min(60, translateY));
           imgRef.current.style.transform = `translateY(${clampedY}px)`;
         }
@@ -70,47 +71,82 @@ function ParallaxImage({ src, alt, speed = -0.12 }: { src: string; alt: string; 
   return <img ref={imgRef} src={src} alt={alt} style={{ willChange: 'transform' }} />;
 }
 
-export default function StrategySection() {
+import { Skeleton } from '../ui/skeleton';
+
+export default function StrategySection({ isLoading }: { isLoading?: boolean }) {
+  if (isLoading) {
+    return (
+      <section className="strategy" id="services">
+        <div className="strategy__header">
+          <Skeleton className="h-10 w-64 mx-auto mb-4" />
+          <Skeleton className="h-5 w-96 mx-auto" />
+        </div>
+        <div className="timeline">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className={`timeline__item ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}>
+              <div className="timeline__dot" />
+              <div className="timeline__content">
+                <Skeleton className="h-8 w-48 mb-4" />
+                <Skeleton className="h-4 w-full mb-2" />
+                <Skeleton className="h-4 w-[80%]" />
+              </div>
+              <div className="timeline__image">
+                <Skeleton className="w-full aspect-video rounded-xl" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="strategy" id="services">
 
-      <div className="strategy__header" data-aos="fade-up">
+      <motion.div 
+        className="strategy__header"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 0.6 }}
+      >
         <h2>Our Core Capabilities</h2>
         <p>Comprehensive AI solutions tailored for enterprise growth.</p>
-      </div>
+      </motion.div>
 
       <div className="timeline">
         {features.map((f, i) => {
-          const isLeft = i % 2 === 0; // even → text left, image right
+          const isLeft = i % 2 === 0;
 
           return (
             <div
               key={i}
               className={`timeline__item ${isLeft ? 'timeline__item--left' : 'timeline__item--right'}`}
             >
-              {/* Checkpoint dot — centred on the vertical line via CSS */}
               <div className="timeline__dot" />
 
               {/* Text */}
-              <div
+              <motion.div
                 className="timeline__content"
-                data-aos={isLeft ? 'fade-right' : 'fade-left'}
-                data-aos-duration="700"
-                data-aos-delay={String(i * 60)}
+                initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.4 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
               >
                 <h3 className="timeline__title">{f.title}</h3>
                 <p className="timeline__desc">{f.desc}</p>
-              </div>
+              </motion.div>
 
               {/* Illustration */}
-              <div
+              <motion.div
                 className="timeline__image"
-                data-aos={isLeft ? 'fade-left' : 'fade-right'}
-                data-aos-duration="700"
-                data-aos-delay={String(i * 60)}
+                initial={{ opacity: 0, x: isLeft ? 50 : -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.4 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <ParallaxImage src={f.img} alt={f.title} speed={isLeft ? -0.1 : -0.15} />
-              </div>
+              </motion.div>
             </div>
           );
         })}
