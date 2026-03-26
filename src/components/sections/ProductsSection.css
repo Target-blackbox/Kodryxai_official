@@ -375,7 +375,7 @@
 .products__detail-left {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 12px;
 }
 
 .products__detail-title {

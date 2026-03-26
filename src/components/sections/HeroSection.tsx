@@ -136,7 +136,7 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
 
       <div className="hero__content">
         {/* ── Left content ── */}
-        <motion.div 
+        <motion.div
           className="hero__left"
           variants={containerVariants}
           initial={shouldAnimate ? "hidden" : "visible"}
@@ -182,7 +182,7 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
         </motion.div>
 
         {/* ── Right content ── */}
-        <motion.div 
+        <motion.div
           className="hero__right"
           variants={illustrationVariants}
           initial={shouldAnimate ? "hidden" : "visible"}
