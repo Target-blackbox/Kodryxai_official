@@ -162,12 +162,13 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
         <div className="products__perspective-grid">
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="products__card products__card--center" style={{ opacity: 0.5 }}>
-              <Skeleton className="h-6 w-20 mb-4" />
-              <Skeleton className="h-32 w-full mb-4" />
-              <Skeleton className="h-6 w-full mb-2" />
+              <Skeleton className="h-6 w-20 mb-6" />
+              <Skeleton className="h-32 w-full mb-8" />
+              <Skeleton className="h-6 w-full mb-4" />
               <Skeleton className="h-4 w-2/3" />
             </div>
           ))}
+
         </div>
       </section>
     );
