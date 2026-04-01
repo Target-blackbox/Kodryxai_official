@@ -2,6 +2,10 @@ import { useState } from 'react';
 import './ProductsSection.css';
 import kodryxSocialDemo from '../../assets/kodryx_social_demo.mp4';
 import kodryxLensDemo from '../../assets/kodryx_lens.mov';
+import cp1 from '../../assets/c_p1.mp4';
+import cp2 from '../../assets/c_p2.mp4';
+import cp3 from '../../assets/c_p3.mp4';
+import cp4 from '../../assets/c_p4.mp4';
 
 /* ── Inline SVG Illustrations per product ── */
 const WidasIcon = () => (
@@ -125,6 +129,7 @@ const products = [
       tech: 'Powered by advanced AI models integrating Natural Language Processing (NLP), cultural context engines, and adaptive learning systems for personalized and region-aware interactions.',
       useCase: 'AI Personalization / Cultural Intelligence / Conversational AI',
       launchDate: 'April 2026',
+      videoSequence: [cp1, cp2, cp3, cp4],
     }
   }
 ];
@@ -153,7 +158,25 @@ const AbstractDecorations = () => (
 import { Skeleton } from '../ui/skeleton';
 
 export default function ProductsSection({ isLoading }: { isLoading?: boolean }) {
-  const [activeTab, setActiveTab] = useState('kodryxsocial');
+  const [activeProductIndex, setActiveProductIndex] = useState(2);
+  const [currentVideoInSeq, setCurrentVideoInSeq] = useState(0);
+
+  const handleProductSelect = (index: number) => {
+    setActiveProductIndex(index);
+    setCurrentVideoInSeq(0);
+  };
+
+  const activeProduct = products[activeProductIndex];
+
+  const handleVideoEnd = () => {
+    if (activeProduct.details.videoSequence) {
+      setCurrentVideoInSeq((prev: number) => (prev + 1) % (activeProduct.details.videoSequence?.length || 1));
+    }
+  };
+
+  const currentVideoSrc = activeProduct.details.videoSequence 
+    ? activeProduct.details.videoSequence[currentVideoInSeq]
+    : activeProduct.details.video;
 
   if (isLoading) {
     return (
@@ -178,9 +201,6 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
     );
   }
 
-  const activeProduct = products.find(p => p.id === activeTab) || products[2];
-  const activeProductIndex = products.findIndex(p => p.id === activeTab);
-
   return (
     <section className="products" id="products">
       <AbstractDecorations />
@@ -204,8 +224,8 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
           return (
             <div
               key={product.id}
-              className={`products__card ${posClass}`}
-              onClick={() => setActiveTab(product.id)}
+              className={`products__card ${posClass} ${activeProductIndex === index ? 'is-active' : ''}`}
+              onClick={() => handleProductSelect(index)}
             >
               {/* Category badge */}
               <span className="products__card-badge">{product.category}</span>
@@ -274,15 +294,20 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
             </div>
           </div>
           <div className="products__detail-right">
-            {activeProduct.details.video ? (
+            {currentVideoSrc ? (
               <video
-                src={activeProduct.details.startTime ? `${activeProduct.details.video}#t=${activeProduct.details.startTime}` : activeProduct.details.video}
+                src={!activeProduct.details.videoSequence && activeProduct.details.startTime 
+                  ? `${currentVideoSrc}#t=${activeProduct.details.startTime}` 
+                  : currentVideoSrc
+                }
                 className="products__video-player"
                 autoPlay
-                loop
+                loop={!activeProduct.details.videoSequence}
                 muted
                 playsInline
-                key={activeProduct.id}
+                key={`${activeProduct.id}-${currentVideoInSeq}`}
+                onPlay={(e) => (e.currentTarget.playbackRate = 2)}
+                onEnded={handleVideoEnd}
               />
             ) : (
               <div className="products__placeholder-box"></div>
