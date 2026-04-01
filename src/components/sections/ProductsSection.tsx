@@ -31,14 +31,13 @@ const KodryxLensIcon = () => (
   </svg>
 );
 
-const LegImqIcon = () => (
+const CultureSenseIcon = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <rect x="20" y="10" width="24" height="44" rx="3" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
-    <rect x="26" y="18" width="12" height="2" rx="1" fill="#3d52d5" opacity="0.5" />
-    <rect x="26" y="24" width="12" height="2" rx="1" fill="#3d52d5" opacity="0.5" />
-    <rect x="26" y="30" width="8" height="2" rx="1" fill="#3d52d5" opacity="0.5" />
-    <path d="M20 10 L32 4 L44 10" stroke="#3d52d5" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
-    <line x1="32" y1="4" x2="32" y2="10" stroke="#3d52d5" strokeWidth="1.5" />
+    <circle cx="32" cy="32" r="26" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
+    <ellipse cx="32" cy="32" rx="26" ry="10" stroke="#3d52d5" strokeWidth="1" opacity="0.3" />
+    <ellipse cx="32" cy="32" rx="10" ry="26" stroke="#3d52d5" strokeWidth="1" opacity="0.3" />
+    <path d="M32 6v52M6 32h52" stroke="#3d52d5" strokeWidth="1" opacity="0.3" />
+    <circle cx="32" cy="32" r="6" fill="#3d52d5" />
   </svg>
 );
 
@@ -57,7 +56,7 @@ const productIcons: Record<string, React.ReactNode> = {
   'widas': <WidasIcon />,
   'kodryxsocial': <KodryxSocialIcon />,
   'kodryxlens': <KodryxLensIcon />,
-  'legimq': <LegImqIcon />,
+  'culturesense': <CultureSenseIcon />,
 };
 
 const products = [
@@ -116,15 +115,16 @@ const products = [
     }
   },
   {
-    id: 'legimq',
-    name: 'LegImq',
-    tagline: 'Real-time Legal Research Assistant',
+    id: 'culturesense',
+    name: 'Culture Sense',
+    tagline: 'Enhances communication by delivering culturally adaptive messaging across platforms.',
     poweredBy: 'KODRYX AI',
-    category: 'LEGAL AI',
+    category: 'CUSTOMER EXP',
     details: {
-      about: 'LegImq provides instant, accurate legal research and precedent summarization for law firms and corporate legal teams.',
-      tech: 'LangChain, OpenAI, Pinecone',
-      useCase: 'Corporate Legal',
+      about: 'Culture Sense is an intelligent, AI-driven platform designed to enable culturally aware, personalized, and context-sensitive interactions across global audiences. It adapts content based on language, region, traditions, and user behavior.',
+      tech: 'Powered by advanced AI models integrating Natural Language Processing (NLP), cultural context engines, and adaptive learning systems for personalized and region-aware interactions.',
+      useCase: 'AI Personalization / Cultural Intelligence / Conversational AI',
+      launchDate: 'April 2026',
     }
   }
 ];

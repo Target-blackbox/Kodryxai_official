@@ -43,7 +43,7 @@ export default function Footer() {
                 <li><a href="https://automyx-ai.web.app/">Kodryx Social</a></li>
                 <li><a href="#">WIDAS</a></li>
                 <li><a href="#">Kodryx Lens</a></li>
-                <li><a href="#">Legal Lens</a></li>
+                <li><a href="#">Culture Sense</a></li>
                 <li><a href="#">ReductCO2e</a></li>
 
 
