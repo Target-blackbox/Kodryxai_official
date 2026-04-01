@@ -6,6 +6,8 @@ import cp1 from '../../assets/c_p1.mp4';
 import cp2 from '../../assets/c_p2.mp4';
 import cp3 from '../../assets/c_p3.mp4';
 import cp4 from '../../assets/c_p4.mp4';
+import waP1 from '../../assets/wa_p1.mp4';
+import waP2 from '../../assets/wa_p2.mp4';
 
 /* ── Inline SVG Illustrations per product ── */
 const WidasIcon = () => (
@@ -87,6 +89,7 @@ const products = [
       tech: 'Advanced AI Image Analysis & Smartphone Diagnostics',
       useCase: 'Wound Care Monitoring & Diagnostic Assistance',
       launchDate: 'January 2026',
+      dualVideo: [waP1, waP2],
     }
   },
   {
@@ -294,7 +297,31 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
             </div>
           </div>
           <div className="products__detail-right">
-            {currentVideoSrc ? (
+            {activeProduct.details.dualVideo ? (
+              <div className="products__dual-video">
+                {activeProduct.id === 'widas' && (
+                  <div className="products__video-labels">
+                    <span>Patient App</span>
+                    <span>Clinician Dashboard</span>
+                  </div>
+                )}
+                <div className="products__dual-video-inner">
+                  {activeProduct.details.dualVideo.map((src: string, i: number) => (
+                    <div key={i} className="products__phone-frame">
+                      <video
+                        src={src}
+                        className="products__video-player"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        onPlay={(e) => (e.currentTarget.playbackRate = 3)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : currentVideoSrc ? (
               <video
                 src={!activeProduct.details.videoSequence && activeProduct.details.startTime 
                   ? `${currentVideoSrc}#t=${activeProduct.details.startTime}` 
