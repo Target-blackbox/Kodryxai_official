@@ -3,7 +3,7 @@ import './ProductsSection.css';
 import kodryxSocialDemo from '../../assets/kodryx_social_demo.mp4';
 
 /* ── Inline SVG Illustrations per product ── */
-const DocuCAIcon = () => (
+const WidasIcon = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
     <rect x="10" y="6" width="36" height="46" rx="5" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
     <rect x="17" y="16" width="22" height="2.5" rx="1" fill="#3d52d5" opacity="0.5" />
@@ -57,7 +57,7 @@ const EcoCaIcon = () => (
 
 const productIcons: Record<string, React.ReactNode> = {
   'eco-ca': <EcoCaIcon />,
-  'docuca': <DocuCAIcon />,
+  'widas': <WidasIcon />,
   'kodryxsocial': <CyberSaathiIcon />,
   'vartalq': <VartalQIcon />,
   'legimq': <LegImqIcon />,
@@ -77,15 +77,16 @@ const products = [
     }
   },
   {
-    id: 'docuca',
-    name: 'DocuCA',
-    tagline: 'Regulatory Automation Assistant',
+    id: 'widas',
+    name: 'WIDAS',
+    tagline: 'AI-powered platform for early detection and monitoring of chronic wounds.',
     poweredBy: 'KODRYX AI',
-    category: 'LEGAL TECH',
+    category: 'HEALTHCARE',
     details: {
-      about: 'DocuCA handles massive regulatory document parsing and compliance checking automatically, reducing audit time by 75%.',
-      tech: 'Python, FastAPI, LlamaIndex',
-      useCase: 'Legal & Auditing',
+      about: 'WIDAS (Wound Intelligence & Decision Assistance System) is an AI-powered platform for early detection and monitoring of chronic wounds, especially diabetic foot ulcers. It uses advanced image analysis and patient data to help clinicians quickly assess wound severity and predict infection risks.',
+      tech: 'Advanced AI Image Analysis & Smartphone Diagnostics',
+      useCase: 'Wound Care Monitoring & Diagnostic Assistance',
+      launchDate: 'January 2026',
     }
   },
   {
