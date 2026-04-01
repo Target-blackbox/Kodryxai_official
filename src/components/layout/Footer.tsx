@@ -40,11 +40,12 @@ export default function Footer() {
             <div className="footer__nav-col">
               <h5 className="footer__col-title">Products</h5>
               <ul className="footer__links">
+                <li><a href="https://automyx-ai.web.app/">Kodryx Social</a></li>
                 <li><a href="#">Legal Lens</a></li>
                 <li><a href="#">VartalQ</a></li>
                 <li><a href="#">ReductCO2e</a></li>
                 <li><a href="#">DocuCA</a></li>
-                <li><a href="#">Cyber Saathi</a></li>
+
               </ul>
             </div>
             <div className="footer__nav-col">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './ProductsSection.css';
+import kodryxSocialDemo from '../../assets/kodryx_social_demo.mp4';
 
 /* ── Inline SVG Illustrations per product ── */
 const DocuCAIcon = () => (
@@ -57,7 +58,7 @@ const EcoCaIcon = () => (
 const productIcons: Record<string, React.ReactNode> = {
   'eco-ca': <EcoCaIcon />,
   'docuca': <DocuCAIcon />,
-  'cybersaathi': <CyberSaathiIcon />,
+  'kodryxsocial': <CyberSaathiIcon />,
   'vartalq': <VartalQIcon />,
   'legimq': <LegImqIcon />,
 };
@@ -88,15 +89,17 @@ const products = [
     }
   },
   {
-    id: 'cybersaathi',
-    name: 'CYBER SAATHI',
-    tagline: 'AI WhatsApp assistant for cybercrime reporting and legal help.',
+    id: 'kodryxsocial',
+    name: 'Kodryx Social',
+    tagline: 'Automates messaging and interactions across WhatsApp, Instagram, and Telegram using AI.',
     poweredBy: 'KODRYX AI',
-    category: 'CYBERSECURITY',
+    category: 'MARKETING',
     details: {
-      about: 'Cyber Saathi helps citizens report cyber crimes, understand the IPC/IT Act, and get actionable legal recommendations — instantly via WhatsApp.',
-      tech: 'Agentic AI + WhatsApp',
-      useCase: 'Cybersecurity, LegalTech, Public Safety, Social Impact AI',
+      about: 'Kodryx Social is a cutting-edge platform designed for autonomous and adaptive interactions across major social channels.',
+      tech: 'Powered by advanced agentic AI systems for autonomous and adaptive interactions',
+      useCase: 'Marketing Automation / Conversational AI / Social Media Automation',
+      launchDate: 'March 2026',
+      video: kodryxSocialDemo,
     }
   },
   {
@@ -149,7 +152,7 @@ const AbstractDecorations = () => (
 import { Skeleton } from '../ui/skeleton';
 
 export default function ProductsSection({ isLoading }: { isLoading?: boolean }) {
-  const [activeTab, setActiveTab] = useState('cybersaathi');
+  const [activeTab, setActiveTab] = useState('kodryxsocial');
 
   if (isLoading) {
     return (
@@ -258,7 +261,7 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
                 <tbody>
                   <tr><th>Tool:</th><td>{activeProduct.name}</td></tr>
                   <tr><th>Function:</th><td>{activeProduct.tagline}</td></tr>
-                  <tr><th>Launch Date:</th><td>April 2025</td></tr>
+                  <tr><th>Launch Date:</th><td>{activeProduct.details.launchDate || 'April 2025'}</td></tr>
                   <tr><th>Industry:</th><td>{activeProduct.details.useCase}</td></tr>
                   <tr><th>Built With:</th><td>{activeProduct.details.tech}</td></tr>
                 </tbody>
@@ -270,7 +273,18 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
             </div>
           </div>
           <div className="products__detail-right">
-            <div className="products__placeholder-box"></div>
+            {activeProduct.details.video ? (
+              <video
+                src={`${activeProduct.details.video}#t=11`}
+                className="products__video-player"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            ) : (
+              <div className="products__placeholder-box"></div>
+            )}
           </div>
         </div>
       </div>
