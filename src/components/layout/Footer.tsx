@@ -42,8 +42,8 @@ export default function Footer() {
               <ul className="footer__links">
                 <li><a href="https://automyx-ai.web.app/">Kodryx Social</a></li>
                 <li><a href="#">WIDAS</a></li>
-                <li><a href="#">Legal Lens</a></li>
                 <li><a href="#">Kodryx Lens</a></li>
+                <li><a href="#">Legal Lens</a></li>
                 <li><a href="#">ReductCO2e</a></li>
 
 
