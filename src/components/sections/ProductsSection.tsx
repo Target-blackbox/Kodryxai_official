@@ -23,7 +23,7 @@ const CyberSaathiIcon = () => (
   </svg>
 );
 
-const VartalQIcon = () => (
+const KodryxLensIcon = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
     <rect x="24" y="8" width="16" height="28" rx="8" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
     <path d="M16 32c0 8.8 7.2 16 16 16s16-7.2 16-16" stroke="#3d52d5" strokeWidth="1.5" strokeLinecap="round" fill="none" />
@@ -59,7 +59,7 @@ const productIcons: Record<string, React.ReactNode> = {
   'eco-ca': <EcoCaIcon />,
   'widas': <WidasIcon />,
   'kodryxsocial': <CyberSaathiIcon />,
-  'vartalq': <VartalQIcon />,
+  'kodryxlens': <KodryxLensIcon />,
   'legimq': <LegImqIcon />,
 };
 
@@ -104,15 +104,16 @@ const products = [
     }
   },
   {
-    id: 'vartalq',
-    name: 'VartalQ',
-    tagline: 'AI Voice Agents for Enterprise Calls',
+    id: 'kodryxlens',
+    name: 'Kodryx Lens',
+    tagline: 'AI assistant for medical scan analysis and radiologist support.',
     poweredBy: 'KODRYX AI',
-    category: 'VOICE AI',
+    category: 'MEDICAL AI',
     details: {
-      about: 'VartalQ deploys intelligent AI voice agents that handle customer calls, support queries, and outbound lead qualifications with human-like conversation abilities.',
-      tech: 'ElevenLabs, Twilio, Node.js',
-      useCase: 'Customer Support & Sales',
+      about: 'Kodryx Lens is an AI-powered assistant that helps doctors and radiologists analyze medical scans more efficiently. It automatically selects key frames from large image sets, saving time and reducing manual effort while providing clear summaries of findings as a second opinion.',
+      tech: 'Computer Vision & Intelligent Frame Selection',
+      useCase: 'Radiology / Clinical Decision Support',
+      launchDate: 'February 2026',
     }
   },
   {
