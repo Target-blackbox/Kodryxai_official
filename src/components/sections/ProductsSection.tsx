@@ -1,36 +1,33 @@
 import { useState } from 'react';
 import './ProductsSection.css';
 import kodryxSocialDemo from '../../assets/kodryx_social_demo.mp4';
+import kodryxLensDemo from '../../assets/kodryx_lens.mov';
 
 /* ── Inline SVG Illustrations per product ── */
 const WidasIcon = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <rect x="10" y="6" width="36" height="46" rx="5" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
-    <rect x="17" y="16" width="22" height="2.5" rx="1" fill="#3d52d5" opacity="0.5" />
-    <rect x="17" y="23" width="22" height="2.5" rx="1" fill="#3d52d5" opacity="0.5" />
-    <rect x="17" y="30" width="14" height="2.5" rx="1" fill="#3d52d5" opacity="0.5" />
-    <circle cx="42" cy="46" r="11" fill="#3d52d5" />
-    <path d="M37 46l3.5 3.5L47 42" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="32" cy="32" r="26" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
+    <rect x="22" y="30" width="20" height="4" rx="2" fill="#3d52d5" />
+    <rect x="30" y="22" width="4" height="20" rx="2" fill="#3d52d5" />
+    <path d="M12 32h5M47 32h5M32 12v5M32 47v5" stroke="#3d52d5" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
   </svg>
 );
 
-const CyberSaathiIcon = () => (
+const KodryxSocialIcon = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <path d="M32 6L12 14v18c0 12 9 22 20 26 11-4 20-14 20-26V14L32 6z" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
-    <path d="M32 14L20 19v11c0 7 5.5 13.5 12 16 6.5-2.5 12-9 12-16V19L32 14z" fill="#3d52d5" opacity="0.15" />
-    <circle cx="32" cy="28" r="7" stroke="#3d52d5" strokeWidth="1.5" fill="white" />
-    <circle cx="32" cy="28" r="3" fill="#3d52d5" />
+    <path d="M52 30c0 11-10 20-22 20a21 21 0 0 1-13-4l-9 3 2-8a21 21 0 1 1 42-11z" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
+    <circle cx="21" cy="30" r="2" fill="#3d52d5" />
+    <circle cx="30" cy="30" r="2" fill="#3d52d5" />
+    <circle cx="39" cy="30" r="2" fill="#3d52d5" />
   </svg>
 );
 
 const KodryxLensIcon = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-    <rect x="24" y="8" width="16" height="28" rx="8" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
-    <path d="M16 32c0 8.8 7.2 16 16 16s16-7.2 16-16" stroke="#3d52d5" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-    <line x1="32" y1="48" x2="32" y2="56" stroke="#3d52d5" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="24" y1="56" x2="40" y2="56" stroke="#3d52d5" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="27" y1="22" x2="37" y2="22" stroke="#3d52d5" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
-    <line x1="27" y1="27" x2="37" y2="27" stroke="#3d52d5" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
+    <rect x="12" y="12" width="40" height="40" rx="8" fill="#dce8ff" stroke="#3d52d5" strokeWidth="1.5" />
+    <circle cx="32" cy="32" r="14" stroke="#3d52d5" strokeWidth="1.5" strokeDasharray="3 2" />
+    <circle cx="32" cy="32" r="6" fill="#3d52d5" />
+    <path d="M12 24h4M48 24h4M12 40h4M48 40h4" stroke="#3d52d5" strokeWidth="1.5" />
   </svg>
 );
 
@@ -58,7 +55,7 @@ const EcoCaIcon = () => (
 const productIcons: Record<string, React.ReactNode> = {
   'eco-ca': <EcoCaIcon />,
   'widas': <WidasIcon />,
-  'kodryxsocial': <CyberSaathiIcon />,
+  'kodryxsocial': <KodryxSocialIcon />,
   'kodryxlens': <KodryxLensIcon />,
   'legimq': <LegImqIcon />,
 };
@@ -101,6 +98,7 @@ const products = [
       useCase: 'Marketing Automation / Conversational AI / Social Media Automation',
       launchDate: 'March 2026',
       video: kodryxSocialDemo,
+      startTime: 11,
     }
   },
   {
@@ -114,6 +112,7 @@ const products = [
       tech: 'Computer Vision & Intelligent Frame Selection',
       useCase: 'Radiology / Clinical Decision Support',
       launchDate: 'February 2026',
+      video: kodryxLensDemo,
     }
   },
   {
@@ -277,12 +276,13 @@ export default function ProductsSection({ isLoading }: { isLoading?: boolean }) 
           <div className="products__detail-right">
             {activeProduct.details.video ? (
               <video
-                src={`${activeProduct.details.video}#t=11`}
+                src={activeProduct.details.startTime ? `${activeProduct.details.video}#t=${activeProduct.details.startTime}` : activeProduct.details.video}
                 className="products__video-player"
                 autoPlay
                 loop
                 muted
                 playsInline
+                key={activeProduct.id}
               />
             ) : (
               <div className="products__placeholder-box"></div>
