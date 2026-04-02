@@ -156,18 +156,16 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
           animate="visible"
         >
           <motion.h1 className="hero__heading" variants={itemVariants}>
-            AI That Builds<br />
-            Competitive Advantage
+            Building Responsible AI Systems<br />
+            for Enterprises & Healthcare
           </motion.h1>
 
           <motion.p className="hero__sub" variants={itemVariants}>
-            Beyond the AI hype: building, scaling, and operating real-world AI for businesses.
-            We design production-ready systems that integrate seamlessly with your data,
-            infrastructure, and workflows.
+            KODRYX AI enables organizations to design, deploy, and govern AI systems with a strong foundation in security, compliance, and real-world impact.
           </motion.p>
 
           <motion.button className="hero__cta" variants={itemVariants}>
-            Get Started
+            Explore Solutions
           </motion.button>
 
           {/* Infinite Marquee Testimonial Cards */}

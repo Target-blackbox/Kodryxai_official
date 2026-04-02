@@ -3,14 +3,15 @@ import mapImg from '../../assets/map.png';
 
 export function WorldMap() {
   const markers = [
+    { id: "canada", top: "18%", left: "15%", label: "Canada" },
     { id: "usa", top: "32%", left: "20%", label: "USA" },
-
-    { id: "india", top: "51%", left: "71%", label: "India" },
-
+    { id: "europe", top: "25%", left: "48%", label: "Europe" },
+    { id: "saudi", top: "44%", left: "57%", label: "Saudi Arabia" },
     { id: "uae", top: "46%", left: "62%", label: "UAE" },
-
+    { id: "oman", top: "48%", left: "64%", label: "Oman" },
+    { id: "india", top: "51%", left: "71%", label: "India" },
+    { id: "singapore", top: "60%", left: "78%", label: "Singapore" },
     { id: "japan", top: "36%", left: "87%", label: "Japan" },
-
     { id: "sa", top: "80%", left: "55%", label: "South Africa" },
   ];
 
