@@ -85,7 +85,7 @@
 .trust-section__title {
   font-size: 3.5rem;
   font-weight: 800;
-  color: #1a202c;
+  color: hsl(231, 64%, 54%);
   letter-spacing: -0.02em;
   margin-bottom: 24px;
 }

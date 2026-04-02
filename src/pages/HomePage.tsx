@@ -19,7 +19,7 @@ const HomePage = () => {
     <main>
       <HeroSection isLoading={isLoading} />
       <ClientsSection isLoading={isLoading} />
-      <StrategySection isLoading={isLoading} />
+      <StrategySection />
       <ProductsSection isLoading={isLoading} />
       <ImpactSection />
       <TrustSection />
