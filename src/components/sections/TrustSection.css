@@ -339,37 +339,58 @@
 .collaboration-logo-item {
   background: #f8fafc;
   border-radius: 12px;
-  height: 60px;
+  height: 64px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border: 1px solid #f1f5f9;
-  transition: transform 0.3s ease;
+  padding: 0 12px;
+  border: 1px solid #edf2f7;
+  gap: 12px;
+  transition: all 0.2s ease;
 }
 
 .collaboration-logo-item:hover {
-  transform: scale(1.02);
-  border-color: #e2e8f0;
+  background: #ffffff;
+  border-color: #4c6ef5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 110, 245, 0.08);
+}
+
+.collab-img-box {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .collab-logo {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.collaboration-logo-item:hover .collab-logo {
+  transform: scale(1.1);
+}
+
+.collab-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.2;
 }
 
 .text-fallback {
-  background: rgba(76, 110, 245, 0.05);
-  padding: 8px;
+  background: #f1f5ff;
+  border-color: #e2e8f0;
+  justify-content: center;
 }
 
-.text-fallback span {
-  font-size: 0.75rem;
-  font-weight: 700;
+.text-fallback .collab-name {
   color: #4c6ef5;
-  text-align: center;
-  line-height: 1.2;
+  font-size: 0.8rem;
 }
 
 .collaboration-pill {

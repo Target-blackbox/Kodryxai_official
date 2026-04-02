@@ -139,22 +139,34 @@ const TrustSection = () => {
                   <div className="trust-card">
                     <h3>Clinical Collaborations & NGOs</h3>
                     <div className="collaboration-grid">
-                    <div className="collaboration-logo-item">
-                      <img src={geethsLogo} alt="Geetha Multi Speciality Hospital" className="collab-logo" />
+                      <div className="collaboration-logo-item">
+                        <div className="collab-img-box">
+                          <img src={sevaLogo} alt="Seva Bharathi" className="collab-logo" />
+                        </div>
+                        <span className="collab-name">Seva Bharathi</span>
+                      </div>
+                      <div className="collaboration-logo-item">
+                        <div className="collab-img-box">
+                          <img src={geethsLogo} alt="Geetha Hospital" className="collab-logo" />
+                        </div>
+                        <span className="collab-name">Geetha Hospital</span>
+                      </div>
+                      <div className="collaboration-logo-item">
+                        <div className="collab-img-box">
+                          <img src={ai4Logo} alt="AI4ALL" className="collab-logo" />
+                        </div>
+                        <span className="collab-name">AI4ALL</span>
+                      </div>
+                      <div className="collaboration-logo-item">
+                        <div className="collab-img-box">
+                          <img src={waigLogo} alt="WAIG" className="collab-logo" />
+                        </div>
+                        <span className="collab-name">WAIG</span>
+                      </div>
+                      <div className="collaboration-logo-item text-fallback">
+                        <span className="collab-name text-center">Sankhyantra Foundation</span>
+                      </div>
                     </div>
-                    <div className="collaboration-logo-item">
-                      <img src={ai4Logo} alt="AI4ALL Global" className="collab-logo" />
-                    </div>
-                    <div className="collaboration-logo-item">
-                      <img src={sevaLogo} alt="Seva Bharathi" className="collab-logo" />
-                    </div>
-                    <div className="collaboration-logo-item">
-                      <img src={waigLogo} alt="WAIG" className="collab-logo" />
-                    </div>
-                    <div className="collaboration-logo-item text-fallback">
-                      <span>Sankhyantra Foundation</span>
-                    </div>
-                  </div>
                   </div>
                   <div className="trust-card advisory-side-card">
                     <h3>Advisory Board</h3>
