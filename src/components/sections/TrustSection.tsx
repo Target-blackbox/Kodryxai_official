@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import './TrustSection.css';
+import isoImg from '../../assets/iso_image.webp';
+import cdImg from '../../assets/cd_image.png';
+import dpiitImg from '../../assets/dpiit_image.png';
 
 const ShieldIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -63,6 +66,14 @@ const TrustSection = () => {
                 <div className="trust-card highlight">
                   <div className="trust-card-icon-main">🏛️</div>
                   <h3>Recognition & Credibility</h3>
+                  <div className="trust-official-logos">
+                    <div className="official-logo-item">
+                      <img src={dpiitImg} alt="DPIIT Recognized" className="trust-logo-img" />
+                    </div>
+                    <div className="official-logo-item">
+                      <img src={cdImg} alt="CDSCO Registered" className="trust-logo-img" />
+                    </div>
+                  </div>
                   <ul className="trust-list">
                     <li>
                       <strong>DPIIT Recognized Startup</strong>
@@ -91,6 +102,9 @@ const TrustSection = () => {
                 <div className="trust-card">
                   <div className="trust-card-icon-main">📜</div>
                   <h3>Standards & Compliance</h3>
+                  <div className="iso-image-container">
+                    <img src={isoImg} alt="ISO Certification" className="trust-iso-img" />
+                  </div>
                   <p className="trust-special-note">Actively working towards global certifications:</p>
                   <div className="iso-badges">
                     <div className="iso-badge">ISO 27001 <small>(In Progress)</small></div>
@@ -126,10 +140,11 @@ const TrustSection = () => {
                   <h3>Medical Advisory Board</h3>
                   <div className="advisory-list">
                     <div className="advisory-member">
-                      <strong>Dr. Jigna Raja</strong>
+                      <strong>Dr. Jayesh Karkare</strong>
+
                     </div>
                     <div className="advisory-member">
-                      <strong>Dr. Jayesh Karkare</strong>
+                      <strong>Dr. Jigna Raja</strong>
                     </div>
                     <div className="advisory-member">
                       <strong>Dr. Bharath</strong>
