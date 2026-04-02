@@ -4,6 +4,12 @@ import partner2 from '../../assets/partner_2.png';
 import partner3 from '../../assets/partner_3.png';
 import partner4 from '../../assets/partner_4.png';
 import partner5 from '../../assets/partner_5.png';
+import llmwearLogo from '../../assets/llmwear.avif';
+import cloudBridgeLogo from '../../assets/cloud_bridge_logo.jpg';
+import dynoteLogo from '../../assets/dynote_logo.jpg';
+import digissuranceLogo from '../../assets/digissurance_logo.jpg';
+import tanitaLogo from '../../assets/tanita_logo.svg';
+import teapotLogo from '../../assets/tea_pot_logo.jpg';
 
 const clients = [
   { name: 'Partner 1', logo: partner1 },
@@ -11,6 +17,12 @@ const clients = [
   { name: 'Partner 3', logo: partner3 },
   { name: 'Partner 4', logo: partner4 },
   { name: 'Partner 5', logo: partner5 },
+  { name: 'LLMWare', logo: llmwearLogo },
+  { name: 'CloudBridge', logo: cloudBridgeLogo },
+  { name: 'Dynote', logo: dynoteLogo },
+  { name: 'Digissurance', logo: digissuranceLogo },
+  { name: 'Tanita', logo: tanitaLogo },
+  { name: 'Tea Pot', logo: teapotLogo },
 ];
 
 import { Skeleton } from '../ui/skeleton';

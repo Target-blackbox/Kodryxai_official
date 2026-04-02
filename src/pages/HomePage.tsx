@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import HeroSection from '../components/sections/HeroSection';
-import PartnersSection from '../components/sections/PartnersSection';
-import StrategySection from '../components/sections/StrategySection';
 import ClientsSection from '../components/sections/ClientsSection';
+import StrategySection from '../components/sections/StrategySection';
 import ProductsSection from '../components/sections/ProductsSection';
+import ImpactSection from '../components/sections/ImpactSection';
 import TrustSection from '../components/sections/TrustSection';
 import ContactSection from '../components/sections/ContactSection';
 
@@ -20,8 +20,8 @@ const HomePage = () => {
       <HeroSection isLoading={isLoading} />
       <ClientsSection isLoading={isLoading} />
       <StrategySection isLoading={isLoading} />
-      <PartnersSection isLoading={isLoading} />
       <ProductsSection isLoading={isLoading} />
+      <ImpactSection />
       <TrustSection />
       <ContactSection />
     </main>

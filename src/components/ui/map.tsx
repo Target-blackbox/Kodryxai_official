@@ -6,12 +6,14 @@ export function WorldMap() {
     { id: "canada", top: "18%", left: "15%", label: "Canada" },
     { id: "usa", top: "32%", left: "20%", label: "USA" },
     { id: "europe", top: "25%", left: "48%", label: "Europe" },
-    { id: "saudi", top: "44%", left: "57%", label: "Saudi Arabia" },
-    { id: "uae", top: "46%", left: "62%", label: "UAE" },
-    { id: "oman", top: "48%", left: "64%", label: "Oman" },
+    { id: "saudi", top: "45%", left: "54%", label: "Saudi Arabia", labelPosition: "left" },
+    { id: "uae", top: "46%", left: "62%", label: "UAE", labelPosition: "top" },
+    { id: "oman", top: "50%", left: "66%", label: "Oman", labelPosition: "right" },
     { id: "india", top: "51%", left: "71%", label: "India" },
     { id: "singapore", top: "60%", left: "78%", label: "Singapore" },
     { id: "japan", top: "36%", left: "87%", label: "Japan" },
+    { id: "australia", top: "78%", left: "84%", label: "Australia" },
+    { id: "russia", top: "22%", left: "68%", label: "Russia" },
     { id: "sa", top: "80%", left: "55%", label: "South Africa" },
   ];
 
@@ -40,7 +42,7 @@ export function WorldMap() {
           {markers.map((marker) => (
             <div
               key={marker.id}
-              className="world-map__marker"
+              className={`world-map__marker is-${marker.labelPosition || 'bottom'}`}
               style={{ top: marker.top, left: marker.left }}
             >
               <div className="world-map__pulse"></div>

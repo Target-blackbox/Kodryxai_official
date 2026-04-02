@@ -35,9 +35,8 @@
 
 .clients__track {
   display: flex;
-  width: calc(250px * 10);
-  /* 5 clients * 2 = 10 items. Assume 250px each including gap */
-  animation: scrollClients 30s linear infinite;
+  width: calc(280px * 22); /* 11 partners * 2 = 22 */
+  animation: scrollClients 45s linear infinite;
   align-items: center;
 }
 
@@ -46,34 +45,26 @@
 }
 
 @keyframes scrollClients {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(-250px * 5));
-  }
-
-  /* Shift exactly 5 items to loop perfectly */
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-280px * 11)); }
 }
 
 .clients__item {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 250px;
+  width: 280px;
   padding: 0 40px;
 }
 
 .clients__item-img {
-  width: 100%;
-  max-width: 160px;
+  width: auto;
+  max-width: 200px;
   height: auto;
-  max-height: 80px;
+  max-height: 100px;
   object-fit: contain;
   mix-blend-mode: multiply;
-  /* Removes baked-in white backgrounds when over light backgrounds! */
-  opacity: 0.8;
+  opacity: 0.9;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 

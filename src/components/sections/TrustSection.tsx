@@ -3,6 +3,10 @@ import './TrustSection.css';
 import isoImg from '../../assets/iso_image.webp';
 import cdImg from '../../assets/cd_image.png';
 import dpiitImg from '../../assets/dpiit_image.png';
+import geethsLogo from '../../assets/geeths_logo.webp';
+import sevaLogo from '../../assets/seva_logo.webp';
+import ai4Logo from '../../assets/ai4_logo.webp';
+import waigLogo from '../../assets/waig_logo.webp';
 
 const ShieldIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -21,7 +25,7 @@ const TrustSection = () => {
 
   const tabs = [
     { id: 'compliance', label: 'Compliance & Regulatory', icon: <ShieldIcon /> },
-    { id: 'clinical', label: 'Clinical Evidence', icon: <MicroscopeIcon /> },
+    { id: 'clinical', label: 'Clinical Evidence & Contribution to Society', icon: <MicroscopeIcon /> },
     { id: 'governance', label: 'AI Governance', icon: <ScaleIcon /> },
   ];
 
@@ -42,6 +46,9 @@ const TrustSection = () => {
           <p className="trust-section__subtitle">
             Powering progress with responsibility. We build secure, reliable, and regulatory-ready AI systems as a foundational commitment to our enterprise partners.
           </p>
+          <div className="trust-global-reach">
+            <span>India</span> • <span>Japan</span> • <span>USA</span> • <span>Singapore</span> • <span>Canada</span> • <span>Middle East</span> • <span>Europe</span> • <span>Australia</span> • <span>Russia</span>
+          </div>
         </div>
 
         <div className="trust-section__tabs-container">
@@ -128,32 +135,41 @@ const TrustSection = () => {
                     <div className="clinical-item">Evidence-based continuous improvement</div>
                   </div>
                 </div>
-                <div className="trust-card">
-                  <h3>Clinical Collaborations</h3>
-                  <div className="collaboration-row">
-                    <div className="collaboration-pill">Geetha Multi Speciality Hospital</div>
-                    <div className="collaboration-pill">Partner Dental Clinics</div>
-                    <div className="collaboration-pill">Oral Radiology Centers</div>
-                  </div>
-                </div>
-                <div className="trust-card">
-                  <h3>Medical Advisory Board</h3>
-                  <div className="advisory-list">
-                    <div className="advisory-member">
-                      <strong>Dr. Jayesh Karkare</strong>
-
+                <div className="trust-row-side">
+                  <div className="trust-card">
+                    <h3>Clinical Collaborations & NGOs</h3>
+                    <div className="collaboration-grid">
+                    <div className="collaboration-logo-item">
+                      <img src={geethsLogo} alt="Geetha Multi Speciality Hospital" className="collab-logo" />
                     </div>
-                    <div className="advisory-member">
-                      <strong>Dr. Jigna Raja</strong>
+                    <div className="collaboration-logo-item">
+                      <img src={ai4Logo} alt="AI4ALL Global" className="collab-logo" />
                     </div>
-                    <div className="advisory-member">
-                      <strong>Dr. Bharath</strong>
+                    <div className="collaboration-logo-item">
+                      <img src={sevaLogo} alt="Seva Bharathi" className="collab-logo" />
+                    </div>
+                    <div className="collaboration-logo-item">
+                      <img src={waigLogo} alt="WAIG" className="collab-logo" />
+                    </div>
+                    <div className="collaboration-logo-item text-fallback">
+                      <span>Sankhyantra Foundation</span>
                     </div>
                   </div>
-                </div>
-                <div className="trust-card highlight">
-                  <h3>Responsible Use Policy</h3>
-                  <p>Our systems are <strong>decision-support tools</strong>. We empower qualified healthcare professionals without replacing their clinical judgment.</p>
+                  </div>
+                  <div className="trust-card advisory-side-card">
+                    <h3>Advisory Board</h3>
+                    <div className="advisory-grid">
+                      {[
+                        'Dr. Raju', 'Santhana Selvan', 'Umang Mehta',
+                        'Dr. Jigna Raja', 'Dr. Jayesh Karkere', 'Dr. Dollar Karkere',
+                        'CA Shiva Prasad', 'Anwar Shaik Kapur', 'Syson Jose', 'Satish Chandra'
+                      ].map((name, idx) => (
+                        <div key={idx} className="advisory-member">
+                          <strong>{name}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

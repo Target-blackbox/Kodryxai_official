@@ -94,8 +94,24 @@
   font-size: 1.15rem;
   color: #4a5568;
   max-width: 750px;
-  margin: 0 auto;
+  margin: 0 auto 24px;
   line-height: 1.7;
+}
+
+.trust-global-reach {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.trust-global-reach span {
+  color: #4c6ef5;
 }
 
 /* Tabs Styling */
@@ -200,6 +216,27 @@
   grid-column: 1 / -1;
 }
 
+.trust-card.span-2 {
+  grid-column: span 2;
+}
+
+.trust-row-side {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 30px;
+}
+
+.advisory-side-card {
+  height: 100%;
+}
+
+@media (max-width: 992px) {
+  .trust-row-side {
+    grid-template-columns: 1fr;
+  }
+}
+
 .trust-card-icon-main {
   font-size: 2.5rem;
   margin-bottom: 24px;
@@ -277,10 +314,10 @@
 }
 
 /* Advisory Board Members */
-.advisory-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.advisory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
 }
 
 .advisory-member {
@@ -289,12 +326,50 @@
   border-radius: 10px;
   color: #1e293b;
   font-weight: 700;
+  text-align: center;
+  border: 1px solid #f1f5f9;
 }
 
-.collaboration-row {
+.collaboration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.collaboration-logo-item {
+  background: #f8fafc;
+  border-radius: 12px;
+  height: 60px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #f1f5f9;
+  transition: transform 0.3s ease;
+}
+
+.collaboration-logo-item:hover {
+  transform: scale(1.02);
+  border-color: #e2e8f0;
+}
+
+.collab-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.text-fallback {
+  background: rgba(76, 110, 245, 0.05);
+  padding: 8px;
+}
+
+.text-fallback span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4c6ef5;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .collaboration-pill {
