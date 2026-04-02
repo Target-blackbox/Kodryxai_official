@@ -4,6 +4,8 @@ import App from './App.tsx';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import { BrowserRouter } from 'react-router-dom';
+
 AOS.init({
   duration: 800,
   once: true,
@@ -12,6 +14,8 @@ AOS.init({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>,
 );

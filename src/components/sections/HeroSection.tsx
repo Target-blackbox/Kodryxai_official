@@ -107,7 +107,7 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
   };
 
   return (
-    <section className="hero">
+    <section className="hero" id="home">
       {/* ── Frosted Mesh Gradient Background ── */}
       <div className="hero__mesh-container">
         <div className="hero__mesh-blob hero__mesh-blob--1"></div>

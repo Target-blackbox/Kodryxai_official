@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-
 import favcon from '../../assets/favcon.webp';
 
 const navLinks = [
-  { name: 'Home', id: 'home' },
-  { name: 'Solutions', id: 'solutions' }, // Maps to features/capabilities
-  { name: 'Products', id: 'products' },
-  { name: 'Resources', id: 'resources' }
+  { name: 'Home', id: 'home', path: '/' },
+  { name: 'Solutions', id: 'solutions', path: '/#solutions' },
+  { name: 'Products', id: 'products', path: '/#products' },
+  { name: 'Careers', id: 'careers', path: '/careers' },
 ];
 
 export default function Navbar() {
   const [active, setActive] = useState('Home');
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,23 +24,52 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (name: string, id: string) => {
+  // Update active state based on current location
+  useEffect(() => {
+    if (location.pathname === '/careers') {
+      setActive('Careers');
+    } else if (location.pathname === '/' && !location.hash) {
+      setActive('Home');
+    }
+  }, [location.pathname, location.hash]);
+
+  const handleNavClick = (name: string, path: string) => {
     setActive(name);
-    if (id === 'home') {
+
+    if (path.startsWith('/#')) {
+      const targetId = path.split('#')[1];
+      if (location.pathname !== '/') {
+        // Navigate home first, then scroll
+        navigate('/');
+        setTimeout(() => {
+          const el = document.getElementById(targetId);
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // Already on home, just scroll
+        const el = document.getElementById(targetId);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    } else if (path === '/') {
+      if (location.pathname !== '/') {
+        navigate('/');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      const el = document.getElementById(id);
-      if (el) {
-        // Offset by roughly navbar height
-        const y = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
+      // Direct page navigation (like Careers)
+      navigate(path);
     }
   };
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <div className="navbar__logo" onClick={() => handleNavClick('Home', 'home')}>
+      <div className="navbar__logo" onClick={() => handleNavClick('Home', '/')}>
         <img src={favcon} alt="Kodryx AI" className="navbar__logo-img" />
         <span className="navbar__brand-text">KODRYX AI</span>
       </div>
@@ -48,7 +79,7 @@ export default function Navbar() {
           <li key={link.name}>
             <button
               className={`navbar__link${active === link.name ? ' navbar__link--active' : ''}`}
-              onClick={() => handleNavClick(link.name, link.id)}
+              onClick={() => handleNavClick(link.name, link.path)}
             >
               {link.name}
             </button>
@@ -56,7 +87,7 @@ export default function Navbar() {
         ))}
       </ul>
 
-      <button className="navbar__cta" onClick={() => handleNavClick('Contact', 'contact')}>Contact Us</button>
+      <button className="navbar__cta" onClick={() => handleNavClick('Contact', '/#contact')}>Contact Us</button>
     </nav>
   );
 }

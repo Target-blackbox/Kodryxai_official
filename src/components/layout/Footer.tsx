@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="footer__brand-info">
             <a href="#home" className="footer__logo-anchor">
               <img src={favcon} alt="Kodryx AI" className="footer__logo-icon" />
-              <span className="footer__brand-text">KODRYX AI</span>
+              <span className="footer__brand-text" style={{ background: 'linear-gradient(135deg, #1a202c 0%, #4c6ef5 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>KODRYX AI</span>
             </a>
             <p className="footer__subtitle">
               Kodryx AI — Powering enterprises with practical, production-ready AI.
@@ -61,6 +61,7 @@ export default function Footer() {
               <ul className="footer__links">
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Brochure</a></li>
+                <li><a href="#trust">Compliance & Trust</a></li>
               </ul>
             </div>
           </div>
@@ -80,7 +81,7 @@ export default function Footer() {
           <div className="footer__legal">
             <p className="footer__copyright">Copyrights Kodryx AI 2025</p>
             <div className="footer__bottom-links">
-              <a href="#" className="footer__link-sm">Privacy Policy</a>
+              <a href="#" className="footer__link-sm">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
               <a href="#" className="footer__link-sm">Terms of Service</a>
             </div>
           </div>
