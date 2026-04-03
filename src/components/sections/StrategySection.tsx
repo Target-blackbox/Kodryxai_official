@@ -58,7 +58,7 @@ export default function StrategySection() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   return (
-    <section className="ss-section" id="solutions">
+    <section className="ss-section" id="features">
       <div className="ss-container">
         <header className="ss-header">
           <span className="ss-badge">Strategic Foundation</span>

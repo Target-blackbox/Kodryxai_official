@@ -129,7 +129,12 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    scroll-behavior: smooth;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* index.css — reset only; all design tokens live in styles/global.css */

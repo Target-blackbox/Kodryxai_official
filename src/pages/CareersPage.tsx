@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './CareersPage.css';
 
 /* ── SVGs for Benefits ── */
@@ -49,9 +49,41 @@ const TimeIcon = () => (
 );
 
 const CareersPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    position: '',
+    customPosition: '',
+    resume: null as File | null
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData(prev => ({ ...prev, resume: e.target.files![0] }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 1500);
+  };
 
   const benefits = [
     { title: 'Innovate with Purpose', desc: 'Work on AI systems that have real-world clinical impact and save lives.', icon: <MedicalIcon /> },
@@ -122,12 +154,123 @@ const CareersPage = () => {
                     <span className="job-meta-item"><TimeIcon /> {job.type}</span>
                   </div>
                 </div>
-                <button className="job-apply-btn">Apply Now</button>
+                <button className="job-apply-btn" onClick={() => {
+                  setFormData(prev => ({ ...prev, position: job.title }));
+                  document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' });
+                }}>Apply Now</button>
               </div>
             ))}
           </div>
-          <div className="careers-contact-box">
-            <p>Don't see a role that fits? Send us your CV at <strong>careers@kodryx.com</strong></p>
+          
+          <div className="careers-apply-section" id="apply-form">
+            <div className="careers-apply-header">
+              <h2>Apply for a <span className="text-gradient">Role</span></h2>
+              <p>Don't see a role that fits? Fill out the form below and we'll keep you in mind for future opportunities.</p>
+            </div>
+
+            {submitted ? (
+              <div className="apply-success-msg">
+                <div className="success-icon">✓</div>
+                <h3>Application Received!</h3>
+                <p>Thank you for your interest in Kodryx AI. Our team will review your profile and get back to you soon.</p>
+                <button className="reset-btn" onClick={() => setSubmitted(false)}>Submit Another Application</button>
+              </div>
+            ) : (
+              <form className="careers-apply-form" onSubmit={handleSubmit}>
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label htmlFor="name">Full Name</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      placeholder="John Doe" 
+                      required 
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      placeholder="john@example.com" 
+                      required 
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      placeholder="+91 98765 43210" 
+                      required 
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="position">Position Interested In</label>
+                    <select 
+                      id="position" 
+                      name="position" 
+                      required 
+                      value={formData.position}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Select a position</option>
+                      {jobs.map((job, i) => (
+                        <option key={i} value={job.title}>{job.title}</option>
+                      ))}
+                      <option value="Other">Other (Please specify)</option>
+                      <option value="General Application">General Application</option>
+                    </select>
+                  </div>
+                </div>
+
+                {formData.position === 'Other' && (
+                  <div className="form-group full-width animate-in" style={{ marginBottom: '24px' }}>
+                    <label htmlFor="customPosition">Specify Position</label>
+                    <input 
+                      type="text" 
+                      id="customPosition" 
+                      name="customPosition" 
+                      placeholder="e.g., UI/UX Designer" 
+                      required 
+                      value={formData.customPosition}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                )}
+
+                <div className="form-group full-width">
+                  <label htmlFor="resume">Upload Resume (PDF/DOC)</label>
+                  <div className="file-upload-wrapper">
+                    <input 
+                      type="file" 
+                      id="resume" 
+                      name="resume" 
+                      accept=".pdf,.doc,.docx" 
+                      required 
+                      onChange={handleFileChange}
+                    />
+                    <div className="file-upload-content">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      <span>{formData.resume ? formData.resume.name : "Drag & drop or click to upload"}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" className="form-submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Submit Application"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
@@ -136,3 +279,4 @@ const CareersPage = () => {
 };
 
 export default CareersPage;
+

@@ -5,7 +5,7 @@ import favcon from '../../assets/favcon.webp';
 
 const navLinks = [
   { name: 'Home', id: 'home', path: '/' },
-  { name: 'Solutions', id: 'solutions', path: '/#solutions' },
+  { name: 'Solutions', id: 'features', path: '/#features' },
   { name: 'Products', id: 'products', path: '/#products' },
   { name: 'Careers', id: 'careers', path: '/careers' },
 ];

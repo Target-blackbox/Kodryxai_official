@@ -164,9 +164,9 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
             KODRYX AI enables organizations to design, deploy, and govern AI systems with a strong foundation in security, compliance, and real-world impact.
           </motion.p>
 
-          <motion.button className="hero__cta" variants={itemVariants}>
+          <motion.a href="#features" className="hero__cta" variants={itemVariants}>
             Explore Solutions
-          </motion.button>
+          </motion.a>
 
           {/* Infinite Marquee Testimonial Cards */}
           <div className="hero__testimonials-container">
