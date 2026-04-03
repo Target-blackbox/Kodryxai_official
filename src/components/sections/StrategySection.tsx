@@ -1,149 +1,140 @@
-import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import './StrategySection.css';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, ArrowRight } from 'lucide-react';
 
-import imgGen from '../../assets/gen_ai.png';
-import imgAgentic from '../../assets/agentic_ai.png';
-import imgStrategy from '../../assets/ai_start.png';
+// Importing new assets
+import imgDev from '../../assets/ai_dev.png';
+import imgCyber from '../../assets/ai_cyber.png';
+import imgGov from '../../assets/ai_gov.png';
 
 const features = [
   {
     id: 'development',
     title: 'AI Development',
-    subtitle: 'Autonomous Systems',
+    tag: 'DEVELOPMENT',
     desc: 'Bespoke AI systems built on SLM/LLM foundations with complex multi-agent orchestration and low-latency inference.',
-    details: [
-      { label: 'Core Engine', value: 'Agentic SLM' },
+    img: imgDev,
+    stats: [
       { label: 'Latency', value: '40ms' },
-      { label: 'Scale', value: 'Global' },
-    ],
-    color: '#3b82f6',
-    img: imgGen,
-    tag: 'MODULE_DEV_01',
+      { label: 'Engine', value: 'Agentic SLM' }
+    ]
   },
   {
     id: 'cybersecurity',
     title: 'AI Cybersecurity',
-    subtitle: 'Defensive Strategy',
+    tag: 'CYBERSECURITY',
     desc: 'Forensic-grade hardening for AI intelligence modules, emphasizing data privacy and adversarial threat mitigation.',
-    details: [
+    img: imgCyber,
+    stats: [
       { label: 'Protocols', value: 'Zero Trust' },
-      { label: 'Encryption', value: 'Post-Quantum' },
-      { label: 'Hardening', value: 'Military' },
-    ],
-    color: '#6366f1',
-    img: imgAgentic,
-    tag: 'MODULE_SEC_02',
+      { label: 'Hardening', value: 'Military' }
+    ]
   },
   {
     id: 'governance',
     title: 'AI Governance',
-    subtitle: 'Strategic Compliance',
+    tag: 'GOVERNANCE',
     desc: 'Integrated regulatory frameworks for responsible AI deployment, risk management, and ethical oversight.',
-    details: [
-      { label: 'Framework', value: 'ISO-aligned' },
-      { label: 'Risk Audit', value: 'Continuous' },
-      { label: 'Ethics', value: 'Verified' },
-    ],
-    color: '#8b5cf6',
-    img: imgStrategy,
-    tag: 'MODULE_GOV_03',
-  },
+    img: imgGov,
+    stats: [
+      { label: 'Standard', value: 'ISO-aligned' },
+      { label: 'Audit', value: 'Continuous' }
+    ]
+  }
 ];
 
-const transition: any = { duration: 0.5, ease: [0.4, 0, 0.2, 1] };
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const }
+  }
+};
 
 export default function StrategySection() {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
-
   return (
-    <section className="ss-section" id="features">
-      <div className="ss-container">
-        <header className="ss-header">
-          <span className="ss-badge">Strategic Foundation</span>
-          <h2>The Architecture of Intelligence</h2>
-          <p>Engineered frameworks for the modern enterprise AI landscape.</p>
+    <section className="features-section" id="features">
+      <div className="features-container">
+        <header className="features-header">
+          <motion.span
+            className="features-badge"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            Strategic Foundation
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            The Architecture of Intelligence
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            Engineered frameworks for the modern enterprise AI landscape.
+          </motion.p>
         </header>
 
-        <div className="ss-grid">
-          {features.map((f) => {
-            const isOpen = expandedId === f.id;
-            return (
-              <motion.div
-                key={f.id}
-                layout
-                className={`ss-card ${isOpen ? 'ss-card--open' : ''}`}
-                style={{ '--c': f.color } as any}
-                animate={{ flex: isOpen ? 12 : 1 }}
-                transition={transition}
-                onClick={() => setExpandedId(isOpen ? null : f.id)}
-                onMouseMove={(e) => {
-                  if (!isOpen) {
-                    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-                    (e.currentTarget as HTMLElement).style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                    (e.currentTarget as HTMLElement).style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.setProperty('--mouse-x', '-999px');
-                  (e.currentTarget as HTMLElement).style.setProperty('--mouse-y', '-999px');
-                }}
-              >
-                {/* Collapsed view — always visible */}
-                <div className="ss-collapsed">
-                  {/* Top group */}
-                  <div className="ss-collapsed-top">
-                    <div className="ss-img-wrap">
-                      <img src={f.img} alt={f.title} />
-                    </div>
-                    <span className="ss-tag">{f.tag}</span>
-                    <h3 className="ss-title">{f.title}</h3>
-                    <p className="ss-sub">{f.subtitle}</p>
-                  </div>
-                  {/* Bottom accent — anchors space-between */}
-                  <div className="ss-collapsed-footer">
-                    <div className="ss-collapsed-bar" style={{ background: f.color }} />
-                    <span className="ss-collapsed-cta">Explore <span>→</span></span>
-                  </div>
-                  <div className="ss-toggle">{isOpen ? <X size={18} strokeWidth={2.5} /> : <Plus size={18} strokeWidth={2.5} />}</div>
+        <motion.div
+          className="features-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {features.map((f) => (
+            <motion.div
+              key={f.id}
+              className="features-card"
+              variants={cardVariants}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            >
+              <div className="features-card-image">
+                <img src={f.img} alt={f.title} loading="lazy" />
+                <div className="features-card-overlay" />
+              </div>
+
+              <div className="features-card-content">
+                <div className="features-card-header">
+                  <span className="features-card-tag">{f.tag}</span>
+                  <h3 className="features-card-title">{f.title}</h3>
                 </div>
 
-                {/* Expanded detail panel — slides in from right */}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      className="ss-detail"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.2, duration: 0.35 }}
-                    >
-                      <div className="ss-detail-divider" />
-                      <p className="ss-detail-desc">{f.desc}</p>
-                      <div className="ss-stats">
-                        {f.details.map((d, i) => (
-                          <div key={i} className="ss-stat">
-                            <span className="ss-stat-label">{d.label}</span>
-                            <span className="ss-stat-value" style={{ color: f.color }}>{d.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                        <a
-                          href="#products"
-                          className="ss-cta"
-                          style={{ background: f.color }}
-                          onClick={(e) => { e.stopPropagation(); }}
-                        >
-                          Explore Products <ArrowRight size={16} />
-                        </a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
+                <p className="features-card-desc">{f.desc}</p>
+
+                <div className="features-card-stats">
+                  {f.stats.map((s, idx) => (
+                    <div key={idx} className="features-card-stat">
+                      <span className="features-card-stat-label">{s.label}</span>
+                      <span className="features-card-stat-value">{s.value}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <a href="#products" className="features-card-link">
+                  Explore Products <ArrowRight size={16} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

@@ -1,3 +1,21 @@
+.hero__typed-module {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  white-space: nowrap;
+  padding: 4px 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
 .hero {
   position: relative;
   min-height: 100vh;
@@ -51,6 +69,42 @@
   color: #3d52d5;
   /* Hardcoded blue for 100% reliability */
   letter-spacing: -0.02em;
+}
+
+.hero__typed-container {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero__ghost-text {
+  visibility: hidden;
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero__typed-text {
+  color: #3d52d5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero__cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+  color: #4ca1ff;
+  font-weight: 400;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero__sub {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import { motion } from 'framer-motion';
 import './HeroSection.css';
@@ -40,6 +40,49 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
     }
     return false;
   });
+  
+  // ── Typewriter Animation Logic ──
+  const [typedText, setTypedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  const phrases = [
+    { text: "Enterprises", color: "#6366f1" },
+    { text: "Healthcare", color: "#14b8a6" }
+  ];
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    const handleType = () => {
+      const i = loopNum % phrases.length;
+      const fullText = phrases[i].text;
+
+      setTypedText(isDeleting 
+        ? fullText.substring(0, typedText.length - 1) 
+        : fullText.substring(0, typedText.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 75 : 150);
+
+      if (!isDeleting && typedText === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && typedText === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [typedText, isDeleting, loopNum, typingSpeed, isLoading]);
+
+  // ── Memoized AI Bar Graph Heights ──
+  // Prevents bars from jittering when the typewriter re-renders 
+  const barHeights = useMemo(() => {
+    return [...Array(100)].map(() => 15 + Math.random() * 70);
+  }, []); // Only generate once on mount
 
   if (isLoading) {
     return (
@@ -117,12 +160,12 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
 
         {/* AI Bar Graph Wave Background at Bottom */}
         <div className="hero__waves-container hero__bar-spectrogram">
-          {[...Array(100)].map((_, i) => (
+          {barHeights.map((h, i) => (
             <div
               key={i}
               className="hero__bar"
               style={{
-                height: `${15 + Math.random() * 70}%`,
+                height: `${h}%`,
                 animationDelay: `${i * 0.05}s`
               }}
             />
@@ -156,8 +199,37 @@ export default function HeroSection({ isLoading }: { isLoading?: boolean }) {
           animate="visible"
         >
           <motion.h1 className="hero__heading" variants={itemVariants}>
-            Building Responsible AI Systems<br />
-            for Enterprises & Healthcare
+            Responsible AI Solutions <br />
+            Designed for{" "}
+            <div className="hero__typed-container" style={{ display: 'inline-block', width: 'auto', whiteSpace: 'nowrap' }}>
+              {/* Ghost text reserves the space so elements below don't move */}
+              <span className="hero__ghost-text" aria-hidden="true" style={{ display: 'inline-block', opacity: 0 }}>
+                Enterprises
+              </span>
+              <div 
+                className="hero__typed-module"
+                style={{ 
+                  position: 'absolute', 
+                  left: 0, 
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  display: 'inline-flex', 
+                  alignItems: 'center',
+                  width: 'auto', 
+                  whiteSpace: 'nowrap', 
+                  color: phrases[loopNum % phrases.length].color,
+                  background: `${phrases[loopNum % phrases.length].color}10`,
+                  border: `1px solid ${phrases[loopNum % phrases.length].color}40`,
+                  padding: '2px 16px',
+                  borderRadius: '12px',
+                  backdropFilter: 'blur(8px)',
+                  boxShadow: `0 4px 15px -5px ${phrases[loopNum % phrases.length].color}30`
+                }}
+              >
+                {typedText}
+                <span className="hero__cursor" style={{ color: phrases[loopNum % phrases.length].color }}>|</span>
+              </div>
+            </div>
           </motion.h1>
 
           <motion.p className="hero__sub" variants={itemVariants}>
