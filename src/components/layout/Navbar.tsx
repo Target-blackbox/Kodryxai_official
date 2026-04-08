@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 import favcon from '../../assets/favcon.webp';
 
@@ -13,6 +14,7 @@ const navLinks = [
 export default function Navbar() {
   const [active, setActive] = useState('Home');
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,8 +35,19 @@ export default function Navbar() {
     }
   }, [location.pathname, location.hash]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  };
+
   const handleNavClick = (name: string, path: string) => {
     setActive(name);
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'unset';
 
     if (path.startsWith('/#')) {
       const targetId = path.split('#')[1];
@@ -68,13 +81,17 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${isMenuOpen ? 'navbar--open' : ''}`}>
       <div className="navbar__logo" onClick={() => handleNavClick('Home', '/')}>
         <img src={favcon} alt="Kodryx AI" className="navbar__logo-img" />
         <span className="navbar__brand-text">KODRYX AI</span>
       </div>
 
-      <ul className="navbar__links">
+      <div className={`navbar__mobile-toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+        {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+      </div>
+
+      <ul className={`navbar__links ${isMenuOpen ? 'navbar__links--open' : ''}`}>
         {navLinks.map((link) => (
           <li key={link.name}>
             <button
@@ -85,9 +102,13 @@ export default function Navbar() {
             </button>
           </li>
         ))}
+        <li className="navbar__mobile-cta-li">
+          <button className="navbar__cta navbar__cta--mobile" onClick={() => handleNavClick('Contact', '/#contact')}>Contact Us</button>
+        </li>
       </ul>
 
-      <button className="navbar__cta" onClick={() => handleNavClick('Contact', '/#contact')}>Contact Us</button>
+      <button className="navbar__cta navbar__cta--desktop" onClick={() => handleNavClick('Contact', '/#contact')}>Contact Us</button>
     </nav>
   );
 }
+

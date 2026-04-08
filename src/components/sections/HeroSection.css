@@ -439,13 +439,90 @@
 }
 
 @media (max-width: 1024px) {
+  .hero__content {
+    flex-direction: column;
+    text-align: center;
+    padding: 100px 32px 40px;
+    gap: 60px;
+  }
+
+  .hero__left {
+    padding-right: 0;
+    max-width: 100%;
+    align-items: center;
+  }
+
   .hero__right {
-    display: none;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .hero__img {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .hero__sub {
+    margin: 0 auto;
+  }
+
+  .hero__cta {
+    margin: 12px auto 24px auto;
+  }
+
+  .hero__testimonials-container {
+    max-width: 100%;
+  }
+
+  .hero__bg svg {
+    display: none; /* Curve doesn't work well on mobile stack */
   }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 60px;
+  }
+
+  .hero__heading {
+    font-size: 2.2rem;
+    line-height: 1.25;
+  }
+
+  .hero__typed-module {
+    padding: 2px 12px;
+    font-size: 0.8em;
+  }
+
+  .hero__sub {
+    font-size: 0.95rem;
+  }
+
+  .hero__card {
+    width: 240px;
+    padding: 16px;
+  }
+
   .hero__mesh-container {
     opacity: 0.8;
+  }
+  
+  .hero__bar-spectrogram {
+    height: 15vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__heading {
+    font-size: 1.8rem;
+  }
+  
+  .hero__content {
+    padding: 80px 20px 40px;
+  }
+
+  .hero__img {
+    max-width: 100%;
   }
 }

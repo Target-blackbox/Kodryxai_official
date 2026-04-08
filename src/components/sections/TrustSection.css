@@ -505,19 +505,55 @@
 }
 
 @media (max-width: 768px) {
+  .trust-section {
+    padding: 60px 20px;
+  }
+
   .trust-section__title {
     font-size: 2.2rem;
   }
+
   .trust-section__tabs {
     flex-direction: column;
     width: 100%;
     border-radius: 20px;
   }
+
   .trust-tab-btn {
     width: 100%;
     justify-content: center;
+    padding: 12px 20px;
   }
+
   .trust-grid {
     grid-template-columns: 1fr;
   }
+
+  .trust-card {
+    padding: 30px 24px;
+  }
 }
+
+@media (max-width: 480px) {
+  .trust-section__title {
+    font-size: 1.8rem;
+  }
+
+  .trust-global-reach {
+    font-size: 0.75rem;
+    gap: 10px;
+  }
+
+  .iso-badges {
+    flex-direction: column;
+  }
+
+  .clinical-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collaboration-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

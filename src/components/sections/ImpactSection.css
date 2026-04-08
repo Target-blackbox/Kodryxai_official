@@ -166,7 +166,34 @@
 }
 
 @media (max-width: 768px) {
+  .impact-section {
+    padding: 60px 20px;
+  }
+
   .impact-header h2 {
     font-size: 2.2rem;
   }
+
+  .stat-card {
+    padding: 24px;
+  }
+
+  .stat-value {
+    font-size: 2.2rem;
+  }
 }
+
+@media (max-width: 480px) {
+  .impact-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .impact-box {
+    padding: 24px;
+  }
+
+  .prog-item {
+    padding-left: 16px;
+  }
+}
+

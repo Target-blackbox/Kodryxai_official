@@ -208,3 +208,13 @@
     height: 220px;
   }
 }
+
+@media (max-width: 480px) {
+  .features-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .features-card-content {
+    padding: 24px;
+  }
+}
